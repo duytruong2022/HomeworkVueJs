@@ -84,7 +84,7 @@ export default {
     display: flex;
 }
 .logo {
-    margin-left: 7%;
+    margin-left: 7.7%;
     margin-top: 11px;
     margin-bottom: 12px;
     margin-right: 0.91%;
@@ -139,5 +139,6 @@ export default {
     margin-top: 28px;
     margin-bottom: 28px;
     margin-left: 3.8%;
+    margin-right: 7.7%;
 }
 </style>
