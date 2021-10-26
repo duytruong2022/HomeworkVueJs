@@ -2,24 +2,30 @@
     <div class="filter">
         <div class="filter_title">
             {{ filter.title }}
-            <i class="fas fa-angle-up"></i>
+            <i
+                class="fas"
+                :class="{ 'fa-angle-up': isPlay, 'fa-angle-down': !isPlay }"
+                @click="compact()"
+            ></i>
         </div>
-        <ul v-if="filter.listOptions" class="list_options">
-            <li v-for="(item, index) in filter.listOptions" :key="index" class="op">
-                <div>{{ item.op }}</div>
-                <div>{{ item.quantity }}</div>
-            </li>
-        </ul>
-        <div v-if="filter.colors">
-            <el-radio-group
-                v-model="radio"
-                v-for="(color, index) in filter.colors"
-                :key="index"
-                class="list_color list_options"
-                :style="{ backgroundColor: color }"
-            >
-                <el-radio :label="color"></el-radio>
-            </el-radio-group>
+        <div :class="{ display_no: !isPlay }">
+            <ul v-if="filter.listOptions" class="list_options">
+                <li v-for="(item, index) in filter.listOptions" :key="index" class="op">
+                    <div>{{ item.op }}</div>
+                    <div>{{ item.quantity }}</div>
+                </li>
+            </ul>
+            <ul v-if="filter.colors" class="list_color">
+                <li
+                    v-for="(color, index) in filter.colors"
+                    :key="index"
+                    class="color_bd"
+                    :class="{ boder: color == selectedColor }"
+                    @click="selectColor(color)"
+                >
+                    <div class="color" :style="{ backgroundColor: color }"></div>
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -33,12 +39,23 @@ export default {
     data() {
         return {
             radio: '1',
+            isPlay: true,
+            isSelect: false,
+            selectedColor: 'red',
         };
+    },
+    methods: {
+        compact() {
+            this.isPlay = !this.isPlay;
+        },
+        selectColor(color) {
+            this.selectedColor = color;
+        },
     },
 };
 </script>
 
-<style>
+<style lang="scss">
 .filter_title {
     font-family: Poppins;
     font-style: normal;
@@ -72,19 +89,31 @@ export default {
     justify-content: space-between;
 }
 .list_color {
+    list-style: none;
+    padding: 0px;
     display: flex;
     margin-left: 6.8%;
     margin-right: 8.5%;
+    margin-top: 10px;
 }
-.color {
-    list-style: none;
-    width: 24px;
-    height: 24px;
+.color_bd {
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    margin-right: 6px;
-    display: flex;
+    margin-right: 7px;
+    text-align: center;
+    .color {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        margin: 2px;
+    }
 }
-.el-radio__label {
+
+.display_no {
     display: none;
+}
+.boder {
+    border: 2px solid #0156ff;
 }
 </style>

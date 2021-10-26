@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
-import homework3 from './pages/homework3.vue';
+import homework3 from './pages/listView.vue';
 
 export default [
     {

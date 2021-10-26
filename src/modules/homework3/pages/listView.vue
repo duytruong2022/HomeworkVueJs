@@ -17,10 +17,10 @@
         <div class="title">MSI PS Series (20)</div>
         <div class="layouts">
             <el-row :gutter="6">
-                <el-col :md="4" :lg="4" :xl="4">
+                <el-col :md="5" :lg="5" :xl="5">
                     <ListFiler />
                 </el-col>
-                <el-col :md="20" :lg="20" :xl="20">
+                <el-col :md="19" :lg="19" :xl="19">
                     <div class="product_header">
                         <div class="num_product">Items 1 - 35 of 61</div>
                         <div class="show_op">
