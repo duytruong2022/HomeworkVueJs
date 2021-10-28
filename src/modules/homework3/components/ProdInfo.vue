@@ -22,9 +22,13 @@
 <script>
 import { object } from 'yup/lib/locale';
 import ProdAboutProduct from '../components/ProdAboutProduct.vue';
+import ProdDetails from '../components/ProdDetails.vue'
+import ProdSpecs from '../components/ProdSpecs.vue'
 export default {
     components: {
         ProdAboutProduct,
+        ProdDetails,
+        ProdSpecs,
     },
     props: {
         product: object,
@@ -35,7 +39,7 @@ export default {
 <style lang="scss">
 .prod_info {
     width: 100%;
-    padding-left: 30%;
+    padding-left: 25%;
     padding-top: 67px;
     padding-bottom: 166px;
     padding-right: 11%;
@@ -62,7 +66,7 @@ export default {
     }
     .prod_review {
         margin-top: 7.5px;
-        margin-bottom: 12px;
+        margin-bottom: 23px;
         a {
             font-family: Poppins;
             font-style: normal;
@@ -77,6 +81,7 @@ export default {
     .prod_question {
         display: flex;
         justify-content: space-between;
+        padding-top: 30px;
         .prod_contact {
             font-family: Poppins;
             font-style: normal;

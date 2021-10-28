@@ -44,7 +44,7 @@ export default {
                 CPU: 'N/A',
                 Featured: 'N/A',
                 IOPorts: 'N/A',
-                info: [
+                specifications: [
                     'Intel Core i7-10700F',
                     'Intel H410',
                     'WHITE',
@@ -80,7 +80,7 @@ export default {
         font-weight: 700;
         line-height: 21px;
         color: #000000;
-        margin-left: 20%;
+        margin-left: 15%;
         padding-bottom: 59px;
     }
 }

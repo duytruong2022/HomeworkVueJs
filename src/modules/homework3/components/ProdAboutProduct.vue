@@ -51,6 +51,7 @@ export default {
         list-style: none;
         margin-top: 23px;
         padding: 0px;
+        margin-bottom: 0px;
     }
 }
 </style>

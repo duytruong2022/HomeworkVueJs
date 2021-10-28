@@ -9,9 +9,29 @@
             ></i>
         </div>
         <div :class="{ display_no: !isPlay }">
-            <ul v-if="filter.listOptions" class="list_options">
-                <li v-for="(item, index) in filter.listOptions" :key="index" class="op">
-                    <div>{{ item.op }}</div>
+            <ul v-if="filter.listCategorys" class="list_options">
+                <li
+                    v-for="(item, index) in filter.listCategorys"
+                    :key="index"
+                    class="op"
+                    @click="addCategory(item.id)"
+                >
+                    <div>{{ item.name }}</div>
+                    <div>{{ item.quantity }}</div>
+                </li>
+            </ul>
+            <ul v-if="filter.listPrices" class="list_options">
+                <li
+                    v-for="(item, index) in filter.listPrices"
+                    :key="index"
+                    class="op"
+                    @click="addPrice(item.id)"
+                >
+                    <div>
+                        ${{ item.min }} <span v-if="!item.min">.00 </span>
+                        <span v-if="item.max">- ${{ item.max }}</span>
+                        <span v-else>And About</span>
+                    </div>
                     <div>{{ item.quantity }}</div>
                 </li>
             </ul>
@@ -50,6 +70,14 @@ export default {
         },
         selectColor(color) {
             this.selectedColor = color;
+        },
+        addCategory(id) {
+            this.$emit('add-category', id);
+            console.log(id);
+        },
+        addPrice(id) {
+            this.$emit('add-price', id);
+            console.log(id);
         },
     },
 };
