@@ -1,5 +1,5 @@
 <template>
-    <div class="topbar">
+    <div class="topbars">
         <!-- Navbar -->
         <nav>
             <div class="navbar-custom">

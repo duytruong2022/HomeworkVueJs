@@ -157,7 +157,7 @@ button {
 }
 .sort_op,
 .num_show {
-    height: 50px;
+    height: 40px;
     border: 2px solid #cacdd8;
     box-sizing: border-box;
     border-radius: 2px;

@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
 import homework3 from './pages/listView.vue';
+import Product from './pages/Product.vue';
 
 export default [
     {
@@ -9,5 +10,23 @@ export default [
         meta: {
             public: true,
         },
+    },
+    {
+        path: '/product',
+        name: 'product',
+        component: Product,
+        meta: {
+            public: true,
+        },
+        children: [
+            {
+                path: 'product',
+                name: 'product',
+                component: Product,
+                meta: {
+                    public: true,
+                },
+            },
+        ],
     },
 ] as RouteRecordRaw[];
