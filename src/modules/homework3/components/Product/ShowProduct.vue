@@ -2,14 +2,14 @@
     <div class="prod_show">
         <div class="prod_img">
             <div>
-                <img src="../../../assets/images/homework3/icon/prod_hear_icon.svg" />
-                <img src="../../../assets/images/homework3/icon/prod_trac_icon.svg" />
-                <img src="../../../assets/images/homework3/icon/prod_mail_icon.svg" />
+                <img src="../../../../assets/images/homework3/icon/prod_hear_icon.svg" />
+                <img src="../../../../assets/images/homework3/icon/prod_trac_icon.svg" />
+                <img src="../../../../assets/images/homework3/icon/prod_mail_icon.svg" />
             </div>
             <img v-bind:src="product.img" />
         </div>
         <div class="prod_logo">
-            <img src="../../../assets/images/homework3/product/prod_logo.png" />
+            <img src="../../../../assets/images/homework3/product/prod_logo.png" />
             <div>
                 <p>
                     own it now, up to 6 months interest free

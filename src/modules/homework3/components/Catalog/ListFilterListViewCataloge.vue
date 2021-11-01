@@ -27,7 +27,7 @@
 
 <script>
 import { object } from 'yup/lib/locale';
-import Filter from './filter.vue';
+import Filter from './FilterListViewCataloge.vue';
 
 export default {
     components: {

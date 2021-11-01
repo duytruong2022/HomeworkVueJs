@@ -7,11 +7,13 @@
                 </div>
                 <div class="reviews">
                     <div class="start">
-                        <img src="../../../assets/images/homework3/icon/star.svg" />
-                        <img src="../../../assets/images/homework3/icon/star.svg" />
-                        <img src="../../../assets/images/homework3/icon/star.svg" />
-                        <img src="../../../assets/images/homework3/icon/star.svg" />
-                        <img src="../../../assets/images/homework3/icon/star_none.svg" />
+                        <img src="../../../../assets/images/homework3/icon/star.svg" />
+                        <img src="../../../../assets/images/homework3/icon/star.svg" />
+                        <img src="../../../../assets/images/homework3/icon/star.svg" />
+                        <img src="../../../../assets/images/homework3/icon/star.svg" />
+                        <img
+                            src="../../../../assets/images/homework3/icon/star_none.svg"
+                        />
                     </div>
                     <div class="review">Review ({{ product.reviews }})</div>
                 </div>
@@ -26,7 +28,7 @@
                 <div class="add_to_cart">
                     <button>
                         <img
-                            src="../../../assets/images/homework3/icon/shopping_icon.svg"
+                            src="../../../../assets/images/homework3/icon/shopping_icon.svg"
                         />
                         Add To Cart
                     </button>
@@ -36,13 +38,13 @@
                 <div class="product_stock">
                     <div v-if="!isSock" class="in_stock">
                         <img
-                            src="../../../assets/images/homework3/icon/success_icon.svg"
+                            src="../../../../assets/images/homework3/icon/success_icon.svg"
                         />
                         in stock
                     </div>
                     <div v-else class="out_stock">
                         <img
-                            src="../../../assets/images/homework3/icon/failure_icon.svg"
+                            src="../../../../assets/images/homework3/icon/failure_icon.svg"
                         />
                         out stock
                     </div>
@@ -62,9 +64,9 @@
                     </div>
                 </div>
                 <div class="icon_pro">
-                    <img src="../../../assets/images/homework3/icon/mail_icon.svg" />
-                    <img src="../../../assets/images/homework3/icon/trac_icon.svg" />
-                    <img src="../../../assets/images/homework3/icon/hear_icon.svg" />
+                    <img src="../../../../assets/images/homework3/icon/mail_icon.svg" />
+                    <img src="../../../../assets/images/homework3/icon/trac_icon.svg" />
+                    <img src="../../../../assets/images/homework3/icon/hear_icon.svg" />
                 </div>
             </el-col>
         </el-row>

@@ -2,10 +2,13 @@
     <div>
         <Contact />
         <Topbar />
-        <div class="banner">
-            <img src="../../../assets/images/homework3/baner.png" />
+        <div class="list-view-catalog-banner">
+            <img
+                class="list-view-catalog-banner-img"
+                src="../../../assets/images/homework3/baner.png"
+            />
         </div>
-        <div class="breadcrumb">
+        <div class="list-view-catalog-breadcrumb">
             <el-breadcrumb separator-class="el-icon-arrow-right">
                 <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
                 <el-breadcrumb-item>Laptops</el-breadcrumb-item>
@@ -14,8 +17,8 @@
                 <el-breadcrumb-item>MSI WS Series</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
-        <div class="title">MSI PS Series (20)</div>
-        <div class="layouts">
+        <div class="list-view-catalog-title">MSI PS Series (20)</div>
+        <div class="list-view-catalog-layouts">
             <el-row :gutter="6">
                 <el-col :md="5" :lg="5" :xl="5">
                     <ListFiler
@@ -27,24 +30,30 @@
                     />
                 </el-col>
                 <el-col :md="19" :lg="19" :xl="19">
-                    <div class="product_header">
-                        <div class="num_product">Items 1 - 35 of 61</div>
-                        <div class="show_op">
-                            <div class="op_box">
-                                <label>Sort By: </label>
-                                <select name="" id="">
+                    <div class="list-view-catalog-product-header">
+                        <div class="list-view-catalog-productnum-product">
+                            Items 1 - 35 of 61
+                        </div>
+                        <div class="list-view-catalog-product-show-op">
+                            <div class="list-view-catalog-product-op-box">
+                                <label class="list-view-catalog-product-laber"
+                                    >Sort By:
+                                </label>
+                                <select class="list-view-catalog-product-select">
                                     <option value="" selected>Option 1</option>
                                     <option value="">Option 2</option>
                                 </select>
                             </div>
-                            <div class="op_box">
-                                <label>Show </label>
-                                <select name="" id="">
+                            <div class="list-view-catalog-product-op-box">
+                                <label class="list-view-catalog-product-laber"
+                                    >Show
+                                </label>
+                                <select class="list-view-catalog-product-select">
                                     <option value="" selected>35 per page</option>
                                     <option value="">40 per page</option>
                                 </select>
                             </div>
-                            <div class="pr_icon">
+                            <div class="list-view-catalog-product-pr-icon">
                                 <img
                                     src="../../../assets/images/homework3/icon/op_icon.svg"
                                 />
@@ -54,26 +63,34 @@
                             </div>
                         </div>
                     </div>
-                    <div class="categorySelected">
+                    <div class="list-view-catalog-product-category-selected">
                         <div
                             v-for="(item, index) in listFiler.filterName.listCategorys"
                             :key="index"
                         >
-                            <div v-if="item.selected" class="op_box">
+                            <div
+                                v-if="item.selected"
+                                class="list-view-catalog-product-op-box"
+                            >
                                 <div>{{ item.name }}</div>
-                                <div class="category_num">({{ item.quantity }})</div>
+                                <div class="list-view-catalog-product-category-num">
+                                    ({{ item.quantity }})
+                                </div>
                                 <img
+                                    class="list-view-catalog-product-img"
                                     src="../../../assets/images/homework3/icon/delete_icon.svg"
                                     @click="clearCategory(item.id)"
                                 />
                             </div>
                         </div>
-                        <div class="op_box" @click="clearAll()">Clear All</div>
+                        <div class="list-view-catalog-product-op-box" @click="clearAll()">
+                            Clear All
+                        </div>
                     </div>
-                    <div class="product_list">
+                    <div class="list-view-catalog-product-product-list">
                         <CaculeteProdu
-                            v-for="product in products"
-                            :key="product.name"
+                            v-for="(product, index) in products"
+                            :key="index"
                             :product="product"
                         />
                     </div>
@@ -86,8 +103,8 @@
 <script>
 import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';
-import ListFiler from '../components/listFilter.vue';
-import CaculeteProdu from '../components/Caculate_Product.vue';
+import ListFiler from '../components/Catalog/ListFilterListViewCataloge.vue';
+import CaculeteProdu from '../components/Catalog/ProductListViewCaculate.vue';
 export default {
     components: {
         Topbar,
@@ -98,6 +115,90 @@ export default {
     data() {
         return {
             products: [
+                {
+                    img: require('@/assets/images/homework3/product/1.png'),
+                    name: 'SKU D5515AI',
+                    description:
+                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+                    realPrice: '$499.00',
+                    salePrice: '$499.00',
+                    CPU: 'N/A',
+                    Featured: 'N/A',
+                    IOPorts: 'N/A',
+                    isSock: true,
+                    rating: '4.00',
+                    reviews: '4',
+                },
+                {
+                    img: require('@/assets/images/homework3/product/1.png'),
+                    name: 'SKU D5515AI',
+                    description:
+                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+                    realPrice: '$499.00',
+                    salePrice: '$499.00',
+                    CPU: 'N/A',
+                    Featured: 'N/A',
+                    IOPorts: 'N/A',
+                    isSock: true,
+                    rating: '4.00',
+                    reviews: '4',
+                },
+                {
+                    img: require('@/assets/images/homework3/product/1.png'),
+                    name: 'SKU D5515AI',
+                    description:
+                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+                    realPrice: '$499.00',
+                    salePrice: '$499.00',
+                    CPU: 'N/A',
+                    Featured: 'N/A',
+                    IOPorts: 'N/A',
+                    isSock: true,
+                    rating: '4.00',
+                    reviews: '4',
+                },
+                {
+                    img: require('@/assets/images/homework3/product/1.png'),
+                    name: 'SKU D5515AI',
+                    description:
+                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+                    realPrice: '$499.00',
+                    salePrice: '$499.00',
+                    CPU: 'N/A',
+                    Featured: 'N/A',
+                    IOPorts: 'N/A',
+                    isSock: true,
+                    rating: '4.00',
+                    reviews: '4',
+                },
+                {
+                    img: require('@/assets/images/homework3/product/1.png'),
+                    name: 'SKU D5515AI',
+                    description:
+                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+                    realPrice: '$499.00',
+                    salePrice: '$499.00',
+                    CPU: 'N/A',
+                    Featured: 'N/A',
+                    IOPorts: 'N/A',
+                    isSock: true,
+                    rating: '4.00',
+                    reviews: '4',
+                },
+                {
+                    img: require('@/assets/images/homework3/product/1.png'),
+                    name: 'SKU D5515AI',
+                    description:
+                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+                    realPrice: '$499.00',
+                    salePrice: '$499.00',
+                    CPU: 'N/A',
+                    Featured: 'N/A',
+                    IOPorts: 'N/A',
+                    isSock: true,
+                    rating: '4.00',
+                    reviews: '4',
+                },
                 {
                     img: require('@/assets/images/homework3/product/1.png'),
                     name: 'SKU D5515AI',
@@ -270,16 +371,20 @@ export default {
     },
 };
 </script>
-<style lang="scss">
-.banner {
+<style lang="scss" scoped>
+.list-view-catalog-banner {
     margin-top: 8px;
     text-align: center;
+    .list-view-catalog-banner-img {
+        width: 82%;
+        height: 100px;
+    }
 }
-.banner img {
-    width: 82%;
-    height: 100px;
-}
-.breadcrumb {
+
+.list-view-catalog-breadcrumb {
+    margin-top: 19px;
+    margin-left: 9%;
+    margin-bottom: 19px;
     font-family: Poppins;
     font-style: normal;
     font-weight: normal;
@@ -289,33 +394,30 @@ export default {
     align-items: center;
     text-align: center;
     color: #000000;
-    margin-top: 19px;
-    margin-left: 9%;
-    margin-bottom: 19px;
 }
-.title {
+.list-view-catalog-title {
+    display: flex;
+    margin-left: 9%;
+    margin-bottom: 30px;
     font-family: Poppins;
     font-style: normal;
     font-weight: 600;
     font-size: 32px;
     line-height: 48px;
-    color: #000;
-    display: flex;
     align-items: center;
     text-align: center;
-    margin-left: 9%;
-    margin-bottom: 30px;
+    color: #000;
 }
-.layouts {
+.list-view-catalog-layouts {
     margin-left: 9%;
     margin-right: 9%;
-    .product_header {
-        display: flex;
-        justify-content: space-between;
+    .list-view-catalog-product-header {
         margin-left: 8px;
         margin-right: 8px;
+        display: flex;
+        justify-content: space-between;
     }
-    .categorySelected {
+    .list-view-catalog-product-category-selected {
         margin-left: 8px;
         margin-right: 8px;
         margin-top: 10px;
@@ -325,27 +427,26 @@ export default {
         font-weight: 600;
         font-size: 13px;
         line-height: 210%;
-        display: flex;
         align-items: center;
         color: #000000;
-        .op_box {
+        .list-view-catalog-product-op-box {
             height: 30px;
+            padding: 11px;
+            margin-right: 11px;
             border: 2px solid #cacdd8;
             box-sizing: border-box;
             border-radius: 2px;
-            padding: 11px;
-            margin-right: 11px;
         }
-        .category_num {
+        .list-view-catalog-product-category-num {
             margin-left: 2px;
             font-weight: 400;
             color: #a2a6b0;
         }
-        img {
+        .list-view-catalog-product-img {
             margin-left: 10px;
         }
     }
-    .show_op {
+    .list-view-catalog-product-show-op {
         display: flex;
         .pr_icon img {
             margin-top: 3px;
@@ -354,44 +455,44 @@ export default {
             margin-right: 5px;
         }
     }
-    .num_product {
+    .list-view-catalog-product-num-product {
+        display: flex;
         font-family: Poppins;
         font-style: normal;
         font-weight: normal;
         font-size: 13px;
         line-height: 210%;
-        display: flex;
         align-items: center;
         color: #a2a6b0;
     }
-    .op_box {
+    .list-view-catalog-product-op-box {
         height: 40px;
-        border: 2px solid #cacdd8;
-        box-sizing: border-box;
-        border-radius: 2px;
+        display: flex;
         padding: 11px;
         margin-right: 11px;
         font-family: Poppins;
         font-style: normal;
         font-size: 13px;
         line-height: 24px;
-        display: flex;
         align-items: center;
         text-align: center;
-        select {
-            border: none;
+        border: 2px solid #cacdd8;
+        box-sizing: border-box;
+        border-radius: 2px;
+        .list-view-catalog-product-select {
             font-weight: 600;
+            border: none;
             color: #000;
         }
-        label {
-            border: none;
+        .list-view-catalog-product-laber {
             font-weight: 600;
+            border: none;
             color: #a2a6b0;
         }
     }
 }
 
-.product_list {
+.list-view-catalog-product-product-list {
     margin-top: 13.5px;
     margin-left: 5px;
     margin-right: 5px;

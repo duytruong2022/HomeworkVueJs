@@ -5,13 +5,15 @@
         <ProdTopbar :product="product" />
         <el-row gutter="1">
             <el-col :xs="13" :sm="13" :md="13" :lg="13" :xl="13">
-                <div class="prod_left_layout">
+                <div class="prod-left-layout">
                     <ProdInfo :product="product" />
-                    <div class="prod_more_info">+ MORE INFORMATION</div>
+                    <div class="prod-more-info">+ MORE INFORMATION</div>
                 </div>
             </el-col>
             <el-col :xs="11" :sm="11" :md="11" :lg="11" :xl="11">
-                <ProdShow :product="product" />
+                <router-view>
+                    <ProdShow :product="product" />
+                </router-view>
             </el-col>
         </el-row>
     </div>
@@ -20,9 +22,9 @@
 <script>
 import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';
-import ProdTopbar from '../components/ProdTopbar.vue';
-import ProdInfo from '../components/ProdInfo.vue';
-import ProdShow from '../components/ProdShow.vue';
+import ProdTopbar from '../components/Product/TopbarProduct.vue';
+import ProdInfo from '../components/Product/InfomationProduct.vue';
+import ProdShow from '../components/Product/ShowProduct.vue';
 export default {
     components: {
         Topbar,
@@ -68,11 +70,13 @@ export default {
     },
 };
 </script>
-<style lang="scss">
-.prod_left_layout {
-    background-color: #f5f7ff;
+<style lang="scss" scoped>
+.prod-left-layout {
     margin-bottom: 200px;
-    .prod_more_info {
+    background-color: #f5f7ff;
+    .prod-more-info {
+        margin-left: 15%;
+        padding-bottom: 59px;
         font-family: Poppins;
         font-style: normal;
         font-weight: normal;
@@ -80,8 +84,6 @@ export default {
         font-weight: 700;
         line-height: 21px;
         color: #000000;
-        margin-left: 15%;
-        padding-bottom: 59px;
     }
 }
 </style>

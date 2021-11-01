@@ -4,14 +4,14 @@
             <el-col :xs="13" :sm="13" :md="13" :lg="13" :xl="13">
                 <div class="list_page">
                     <div v-for="page in pages" :key="page.name">
-                        <a
-                            :href="page.link"
+                        <router-link
                             :class="{
                                 page_selected: page.name == pageSelected,
                                 page_normal: page.name != pageSelected,
                             }"
                             @click="selectPage(page.name)"
-                            >{{ page.name }}</a
+                            :to="{ name: page.link, param: {} }"
+                            >{{ page.name }}</router-link
                         >
                     </div>
                 </div>
@@ -48,15 +48,15 @@ export default {
             pages: [
                 {
                     name: 'About Product',
-                    link: '#',
+                    link: 'about-product',
                 },
                 {
                     name: 'Details',
-                    link: '#',
+                    link: 'details-product',
                 },
                 {
                     name: 'Specs',
-                    link: '#',
+                    link: 'specs-product',
                 },
             ],
             numProduct: '100',

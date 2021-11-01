@@ -11,7 +11,7 @@
         <div class="prod_review">
             <a href="#">Be the first to review this product</a>
         </div>
-        <ProdAboutProduct :product="product" />
+        <router-view :product="product" />
         <div class="prod_question">
             <div class="prod_contact">Have a Question? <a href="#">Contact Us</a></div>
             <div class="prod_code">{{ product.code }}</div>
@@ -21,15 +21,8 @@
 
 <script>
 import { object } from 'yup/lib/locale';
-import ProdAboutProduct from '../components/ProdAboutProduct.vue';
-import ProdDetails from '../components/ProdDetails.vue'
-import ProdSpecs from '../components/ProdSpecs.vue'
+
 export default {
-    components: {
-        ProdAboutProduct,
-        ProdDetails,
-        ProdSpecs,
-    },
     props: {
         product: object,
     },

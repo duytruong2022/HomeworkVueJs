@@ -1,0 +1,25 @@
+.el-select {
+    width: 100%;
+}
+.el-input__inner {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #a2a6b0;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+.el-radio {
+    display: flex;
+    .el-radio__label {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 20px;
+        color: #000000;
+        white-space: normal;
+    }
+    .el-radio__input.is-checked + .el-radio__label {
+        color: #000000;
+    }
+}
