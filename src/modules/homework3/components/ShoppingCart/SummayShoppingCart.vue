@@ -22,19 +22,20 @@
             </div>
             <div class="cart-price">
                 GST
-                <div>$1.91</div>
+                <div>${{ gst }}</div>
             </div>
             <div class="cart-price">
                 Order Total
-                <div>$1.91</div>
+                <div>${{ orderTotal }}</div>
             </div>
             <button class="cart-checkout-button">Proceed to Checkout</button>
         </div>
     </div>
 </template>
-<script>
+<script lang="ts">
 import ShoppingCartShippingTax from './ShoppingCartShippingTax.vue';
 import ShoppingCartDistcount from './ShoppingCartDistcount.vue';
+import { product } from '../../store';
 export default {
     components: {
         ShoppingCartShippingTax,
@@ -43,13 +44,28 @@ export default {
     data() {
         return {
             shipping: 21,
-            subtotal: 13047,
+            orderTotal: 0,
+            gst: 0,
         };
     },
     methods: {
-        changeShipping(label) {
+        changeShipping(label: string): void {
             if (label === '2') this.shipping = 0;
             else this.shipping = 21;
+        },
+    },
+    computed: {
+        subtotal(): number {
+            return product.getSumSubtotal;
+        },
+    },
+    watch: {
+        subtotal(): void {
+            this.gst = 0.1 * this.subtotal;
+            this.orderTotal = this.subtotal + this.gst + this.shipping + 1.91;
+        },
+        shipping(): void {
+            this.orderTotal = this.subtotal + this.gst + this.shipping + 1.91;
         },
     },
 };

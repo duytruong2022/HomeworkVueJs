@@ -16,15 +16,15 @@ export default [
         },
     },
     {
-        path: '/product',
-        name: 'product',
+        path: '/product/:id',
+        name: 'product-info',
         component: Product,
         meta: {
             public: true,
         },
         children: [
             {
-                path: 'about',
+                path: '',
                 name: 'about-product',
                 component: AboutProduct,
                 meta: {

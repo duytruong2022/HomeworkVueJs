@@ -1,12 +1,18 @@
 <template>
     <div class="prod_show">
         <div class="prod_img">
-            <div>
+            <div class="prod_img-icon">
                 <img src="../../../../assets/images/homework3/icon/prod_hear_icon.svg" />
                 <img src="../../../../assets/images/homework3/icon/prod_trac_icon.svg" />
                 <img src="../../../../assets/images/homework3/icon/prod_mail_icon.svg" />
             </div>
-            <img v-bind:src="product.img" />
+            <div class="blocka">
+                <el-carousel>
+                    <el-carousel-item v-for="(imge, index) in product.img" :key="index">
+                        <img :src="require('@/assets/images/homework3/' + imge)" />
+                    </el-carousel-item>
+                </el-carousel>
+            </div>
         </div>
         <div class="prod_logo">
             <img src="../../../../assets/images/homework3/product/prod_logo.png" />
@@ -33,7 +39,11 @@ export default {
     padding: 20px;
     .prod_img {
         display: flex;
-        div {
+        .blocka {
+            width: 75%;
+            height: 430px;
+        }
+        .prod_img-icon {
             display: flex;
             flex-direction: column;
             margin-top: 35px;

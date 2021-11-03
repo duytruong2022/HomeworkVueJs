@@ -22,7 +22,7 @@
             <el-row :gutter="6">
                 <el-col :md="5" :lg="5" :xl="5">
                     <ListFiler
-                        :listFiler="listFiler"
+                        :listFiler="listFilters"
                         @add-category="addCategory"
                         @add-price="addPrice"
                         @clear-filter="clearAll"
@@ -65,7 +65,7 @@
                     </div>
                     <div class="list-view-catalog-product-category-selected">
                         <div
-                            v-for="(item, index) in listFiler.filterName.listCategorys"
+                            v-for="(item, index) in listFilters.filterName.listCategorys"
                             :key="index"
                         >
                             <div
@@ -105,6 +105,7 @@ import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';
 import ListFiler from '../components/Catalog/ListFilterListViewCataloge.vue';
 import CaculeteProdu from '../components/Catalog/ProductListViewCaculate.vue';
+import { product } from '../store';
 export default {
     components: {
         Topbar,
@@ -112,233 +113,33 @@ export default {
         ListFiler,
         CaculeteProdu,
     },
-    data() {
-        return {
-            products: [
-                {
-                    img: require('@/assets/images/homework3/product/1.png'),
-                    name: 'SKU D5515AI',
-                    description:
-                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-                    realPrice: '$499.00',
-                    salePrice: '$499.00',
-                    CPU: 'N/A',
-                    Featured: 'N/A',
-                    IOPorts: 'N/A',
-                    isSock: true,
-                    rating: '4.00',
-                    reviews: '4',
-                },
-                {
-                    img: require('@/assets/images/homework3/product/1.png'),
-                    name: 'SKU D5515AI',
-                    description:
-                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-                    realPrice: '$499.00',
-                    salePrice: '$499.00',
-                    CPU: 'N/A',
-                    Featured: 'N/A',
-                    IOPorts: 'N/A',
-                    isSock: true,
-                    rating: '4.00',
-                    reviews: '4',
-                },
-                {
-                    img: require('@/assets/images/homework3/product/1.png'),
-                    name: 'SKU D5515AI',
-                    description:
-                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-                    realPrice: '$499.00',
-                    salePrice: '$499.00',
-                    CPU: 'N/A',
-                    Featured: 'N/A',
-                    IOPorts: 'N/A',
-                    isSock: true,
-                    rating: '4.00',
-                    reviews: '4',
-                },
-                {
-                    img: require('@/assets/images/homework3/product/1.png'),
-                    name: 'SKU D5515AI',
-                    description:
-                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-                    realPrice: '$499.00',
-                    salePrice: '$499.00',
-                    CPU: 'N/A',
-                    Featured: 'N/A',
-                    IOPorts: 'N/A',
-                    isSock: true,
-                    rating: '4.00',
-                    reviews: '4',
-                },
-                {
-                    img: require('@/assets/images/homework3/product/1.png'),
-                    name: 'SKU D5515AI',
-                    description:
-                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-                    realPrice: '$499.00',
-                    salePrice: '$499.00',
-                    CPU: 'N/A',
-                    Featured: 'N/A',
-                    IOPorts: 'N/A',
-                    isSock: true,
-                    rating: '4.00',
-                    reviews: '4',
-                },
-                {
-                    img: require('@/assets/images/homework3/product/1.png'),
-                    name: 'SKU D5515AI',
-                    description:
-                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-                    realPrice: '$499.00',
-                    salePrice: '$499.00',
-                    CPU: 'N/A',
-                    Featured: 'N/A',
-                    IOPorts: 'N/A',
-                    isSock: true,
-                    rating: '4.00',
-                    reviews: '4',
-                },
-                {
-                    img: require('@/assets/images/homework3/product/1.png'),
-                    name: 'SKU D5515AI',
-                    description:
-                        'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-                    realPrice: '$499.00',
-                    salePrice: '$499.00',
-                    CPU: 'N/A',
-                    Featured: 'N/A',
-                    IOPorts: 'N/A',
-                    isSock: true,
-                    rating: '4.00',
-                    reviews: '4',
-                },
-            ],
-            listFiler: {
-                category: {
-                    title: 'Category',
-                    listCategorys: [
-                        {
-                            id: 1,
-                            name: 'CUSTOM PCS',
-                            quantity: 15,
-                            selected: true,
-                        },
-                        {
-                            id: 2,
-                            name: 'MSI ALL-IN-ONE PCS',
-                            quantity: 45,
-                            selected: true,
-                        },
-                        {
-                            id: 3,
-                            name: 'HP/COMPAQ PCS',
-                            quantity: 1,
-                            selected: false,
-                        },
-                    ],
-                },
-                price: {
-                    title: 'Price',
-                    listPrices: [
-                        {
-                            id: 1,
-                            min: 0,
-                            max: 1000000,
-                            quantity: 19,
-                            selected: false,
-                        },
-                        {
-                            id: 2,
-                            min: 1000000,
-                            max: 2000000,
-                            quantity: 21,
-                            selected: false,
-                        },
-                        {
-                            id: 3,
-                            min: 2000000,
-                            max: 3000000,
-                            quantity: 9,
-                            selected: false,
-                        },
-                        {
-                            id: 4,
-                            min: 3000000,
-                            max: 4000000,
-                            quantity: 6,
-                            selected: false,
-                        },
-                        {
-                            id: 5,
-                            min: 4000000,
-                            max: 5000000,
-                            quantity: 3,
-                            selected: false,
-                        },
-                        {
-                            id: 6,
-                            min: 5000000,
-                            max: 6000000,
-                            quantity: 1,
-                            selected: false,
-                        },
-                        {
-                            id: 7,
-                            min: 6000000,
-                            max: 7000000,
-                            quantity: 1,
-                            selected: false,
-                        },
-                        {
-                            id: 8,
-                            min: 7000000,
-                            quantity: 1,
-                            selected: false,
-                        },
-                    ],
-                },
-                color: {
-                    title: 'Color',
-                    colors: ['black', 'red'],
-                },
-                filterName: {
-                    title: 'Filter Name',
-                    num: 0,
-                    listCategorys: [],
-                    listPrices: [],
-                },
-            },
-        };
-    },
     methods: {
         clearCategory(id) {
-            for (const l of this.listFiler.category.listCategorys) {
+            for (const l of this.listFilters.category.listCategorys) {
                 if (l.id === id) {
                     l.selected = false;
                 }
             }
         },
         clearAll() {
-            for (const l of this.listFiler.category.listCategorys) {
+            for (const l of this.listFilters.category.listCategorys) {
                 l.selected = false;
             }
-            for (const l of this.listFiler.price.listPrices) {
+            for (const l of this.listFilters.price.listPrices) {
                 l.selected = false;
             }
-            this.listFiler.filterName.listCategorys = [];
-            this.listFiler.filterName.listPrices = [];
+            this.listFilters.filterName.listCategorys = [];
+            this.listFilters.filterName.listPrices = [];
         },
         addCategory(id) {
-            for (const l of this.listFiler.category.listCategorys) {
+            for (const l of this.listFilters.category.listCategorys) {
                 if (l.id === id) {
                     l.selected = true;
                 }
             }
-            console.log(id);
         },
         addPrice(id) {
-            for (const l of this.listFiler.price.listPrices) {
+            for (const l of this.listFilters.price.listPrices) {
                 if (l.id === id) {
                     l.selected = true;
                     console.log('a');
@@ -347,26 +148,33 @@ export default {
             console.log(id);
         },
         updateFilter() {
-            const f = this.listFiler.category.listCategorys.filter(
+            const f = this.listFilters.category.listCategorys.filter(
                 (item) => item.selected === true,
             );
-            this.listFiler.filterName.listCategorys = f;
-            const g = this.listFiler.price.listPrices.filter(
+            this.listFilters.filterName.listCategorys = f;
+            const g = this.listFilters.price.listPrices.filter(
                 (item) => item.selected === true,
             );
-            console.log(f);
-            this.listFiler.filterName.listPrices = g;
+            this.listFilters.filterName.listPrices = g;
         },
     },
     watch: {
         listFiler: {
             handler: function () {
-                console.log('num');
-                this.listFiler.filterName.num =
-                    this.listFiler.filterName.listCategorys.length +
-                    this.listFiler.filterName.listPrices.length;
+                this.listFilters.filterName.num =
+                    this.listFilters.filterName.listCategorys.length +
+                    this.listFilters.filterName.listPrices.length;
+                console.log('test');
             },
             deep: true,
+        },
+    },
+    computed: {
+        products() {
+            return product.getAllProduct;
+        },
+        listFilters() {
+            return { ...product.getAllFilter };
         },
     },
 };

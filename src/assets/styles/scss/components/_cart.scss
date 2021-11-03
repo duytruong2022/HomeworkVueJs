@@ -23,3 +23,9 @@
         color: #000000;
     }
 }
+.el-carousel--horizontal {
+    height: 100%;
+    .el-carousel__container {
+        height: 100%;
+    }
+}

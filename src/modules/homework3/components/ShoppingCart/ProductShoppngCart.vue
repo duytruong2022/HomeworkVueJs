@@ -2,7 +2,15 @@
     <div class="product-shopping-cart">
         <el-row>
             <el-col :md="4" :lg="4" :xl="4">
-                <img class="product-shopping-cart-img" :src="product.img" />
+                <router-link
+                    class="product_img"
+                    :to="{ name: 'product-info', params: { id: product.id } }"
+                >
+                    <img
+                        class="product-shopping-cart-img"
+                        :src="require('@/assets/images/homework3/' + product.image)"
+                    />
+                </router-link>
             </el-col>
             <el-col :md="8" :lg="8" :xl="8">
                 <div class="product-shopping-cart-description">
@@ -10,25 +18,22 @@
                 </div>
             </el-col>
             <el-col :md="4" :lg="4" :xl="4">
-                <div class="product-shopping-cart-price">${{ product.salePrice }}.00</div>
+                <div class="product-shopping-cart-price">${{ product.price }}.00</div>
             </el-col>
             <el-col :md="3" :lg="3" :xl="3">
                 <div class="product-shopping-quarity">
-                    {{ numProduct }}
+                    {{ product.quantity }}
                     <div class="product-shopping-quarity-edit">
-                        <i
-                            class="fas fa-angle-up"
-                            @click="numProductUp(product.salePrice)"
-                        ></i>
+                        <i class="fas fa-angle-up" @click="numProductUp(product.id)"></i>
                         <i
                             class="fas fa-angle-down"
-                            @click="numProductDown(product.salePrice)"
+                            @click="numProductDown(product.id)"
                         ></i>
                     </div>
                 </div>
             </el-col>
             <el-col :md="4" :lg="4" :xl="4">
-                <div class="product-shopping-cart-price">${{ subtotal }}.00</div>
+                <div class="product-shopping-cart-price">${{ product.subtotal }}.00</div>
             </el-col>
             <el-col :md="1" :lg="1" :xl="1">
                 <div class="product-shopping-icongroup">
@@ -45,30 +50,18 @@
         </el-row>
     </div>
 </template>
-<script>
-import { object } from 'yup/lib/locale';
-import { cart } from '../../store';
+<script lang="ts">
+import { product } from '../../store';
 export default {
     props: {
-        product: object,
-    },
-    data() {
-        return {
-            numProduct: 0,
-            subtotal: 0,
-            num: 0,
-        };
+        product: Object,
     },
     methods: {
-        numProductUp(price) {
-            if (this.numProduct < 100) this.numProduct++;
-            this.subtotal = this.numProduct * price;
+        numProductUp(id: string): void {
+            product.upQuantityCart(id);
         },
-        numProductDown(price) {
-            if (this.numProduct > 0) this.numProduct--;
-            this.subtotal = this.numProduct * price;
-            cart.UpdateCart(this.subtotal);
-            this.num = cart.sumSubtotal;
+        numProductDown(id: string): void {
+            product.downQuantityCart(id);
         },
     },
 };

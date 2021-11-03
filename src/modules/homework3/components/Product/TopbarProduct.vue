@@ -29,7 +29,10 @@
                             <i class="fas fa-angle-down" @click="numProductDown()"></i>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-lg btn-block rounded-pill">
+                    <button
+                        class="btn btn-primary btn-lg btn-block rounded-pill"
+                        @click="addToCart(product.id, numProduct)"
+                    >
                         Add to Cart
                     </button>
                 </div>
@@ -37,11 +40,11 @@
         </el-row>
     </div>
 </template>
-<script>
-import { object } from 'yup/lib/locale';
+<script lang="ts">
+import { product } from '../../store';
 export default {
     props: {
-        product: object,
+        product: Object,
     },
     data() {
         return {
@@ -59,19 +62,24 @@ export default {
                     link: 'specs-product',
                 },
             ],
-            numProduct: '100',
+            numProduct: 1,
             pageSelected: 'About Product',
         };
     },
     methods: {
-        numProductUp() {
-            if (this.numProduct < 100) return this.numProduct++;
+        numProductUp(): void {
+            if (this.numProduct < 100) this.numProduct++;
         },
-        numProductDown() {
-            if (this.numProduct > 0) return this.numProduct--;
+        numProductDown(): void {
+            if (this.numProduct > 0) this.numProduct--;
         },
-        selectPage(page) {
+        selectPage(page: string): void {
             this.pageSelected = page;
+        },
+        addToCart(id: string, num: number): void {
+            const el = { id: id, num: num };
+            product.addToCart(el);
+            alert('success');
         },
     },
 };

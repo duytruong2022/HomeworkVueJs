@@ -25,8 +25,7 @@
     </div>
 </template>
 
-<script>
-import { object } from 'yup/lib/locale';
+<script lang="ts">
 import Filter from './FilterListViewCataloge.vue';
 
 export default {
@@ -34,23 +33,20 @@ export default {
         Filter,
     },
     props: {
-        listFiler: object,
+        listFiler: Object,
     },
     methods: {
-        addCategory(id) {
+        addCategory(id: string): void {
             this.$emit('add-category', id);
-            console.log(id);
         },
-        addPrice(id) {
+        addPrice(id: string): void {
             this.$emit('add-price', id);
-            console.log(id);
         },
-        clearFilter() {
+        clearFilter(): void {
             this.$emit('clear-filter');
         },
-        updateFilter() {
+        updateFilter(): void {
             this.$emit('update-filter');
-            console.log('update');
         },
     },
 };

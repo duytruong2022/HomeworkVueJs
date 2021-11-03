@@ -22,10 +22,10 @@ const router = createRouter({
     routes,
 });
 
-router.beforeEach(
-    VueRouteMiddleware({
-        [GLOBAL_MIDDLEWARE_NAME]: AuthMiddleware,
-    }) as NavigationGuardWithThis<unknown>,
-);
+// router.beforeEach(
+//     VueRouteMiddleware({
+//         [GLOBAL_MIDDLEWARE_NAME]: AuthMiddleware,
+//     }) as NavigationGuardWithThis<unknown>,
+// );
 
 export default router;

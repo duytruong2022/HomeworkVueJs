@@ -1,10 +1,13 @@
 <template>
     <div class="product">
-        <el-row>
+        <el-row gutter="16">
             <el-col :xs="7" :sm="7" :md="7" :lg="7" :xl="7">
-                <div class="product_img">
-                    <img v-bind:src="product.img" />
-                </div>
+                <router-link
+                    class="product_img"
+                    :to="{ name: 'product-info', params: { id: product.id } }"
+                >
+                    <img :src="require('@/assets/images/homework3/' + product.img[0])" />
+                </router-link>
                 <div class="reviews">
                     <div class="start">
                         <img src="../../../../assets/images/homework3/icon/star.svg" />
@@ -22,11 +25,11 @@
                 <div class="product_name">{{ product.name }}</div>
                 <div class="product_description">{{ product.description }}</div>
                 <div class="product_price">
-                    <div class="real_price">{{ product.realPrice }}</div>
-                    <div class="sale_price">{{ product.salePrice }}</div>
+                    <div class="real_price">${{ product.realPrice }}</div>
+                    <div class="sale_price">${{ product.salePrice }}</div>
                 </div>
                 <div class="add_to_cart">
-                    <button>
+                    <button @click="addToCart(product.id)">
                         <img
                             src="../../../../assets/images/homework3/icon/shopping_icon.svg"
                         />
@@ -72,11 +75,19 @@
         </el-row>
     </div>
 </template>
-<script>
+<script lang="ts">
+import { product } from '../../store';
 export default {
     name: 'Product',
     props: {
         product: Object,
+    },
+    methods: {
+        addToCart(id: string): void {
+            const el = { id: id };
+            product.addToCart(el);
+            alert('success');
+        },
     },
 };
 </script>

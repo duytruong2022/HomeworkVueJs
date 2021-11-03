@@ -5,7 +5,6 @@ import { exampleService } from './services/api.service';
 @Module({ dynamic: true, namespaced: true, store, name: 'Count' })
 class Example extends VuexModule {
     count = 0;
-
     @Mutation
     INCREMENT() {
         this.count++;
