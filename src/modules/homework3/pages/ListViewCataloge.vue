@@ -96,46 +96,43 @@
 </template>
 
 <script lang="ts">
+import { Options, Vue } from 'vue-class-component';
 import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';
-import ListFiler from '../components/Catalog/CatalogeListViewListFilter.vue';
+import ListFiler from '../components/Catalog/CaculoateListViewListFilter.vue';
 import CaculeteProdu from '../components/Catalog/CaculateListViewProduct.vue';
 import { filters } from '../store';
 import { IListFilter, IProduct } from '../type';
-export default {
+@Options({
     components: {
         Topbar,
         Contact,
         ListFiler,
         CaculeteProdu,
     },
-    methods: {
-        clearCategory(id: string): void {
-            filters.clearCategory(id);
-            filters.updateFilter();
-            filters.updateproductFilter();
-            filters.updateNumFiler();
-            filters.updateNumberCatagorySelected();
-        },
-        clearAll(): void {
-            filters.clearAllCategory();
-            filters.updateproductFilter();
-            filters.updateNumFiler();
-            filters.updateNumberCatagorySelected();
-        },
-    },
-    computed: {
-        products(): Array<IProduct> {
-            return filters.getProductFilter;
-        },
-        listFilters(): IListFilter {
-            return { ...filters.getAllFilter };
-        },
-        numCategory(): number {
-            return filters.getNumberCatagorySelected;
-        },
-    },
-};
+})
+export default class ListViewCaculate extends Vue {
+    clearCategory(id: string): void {
+        filters.clearCategory(id);
+        filters.updateFilter();
+        filters.updateproductFilter();
+        filters.updateNumFiler();
+        filters.updateNumberCatagorySelected();
+    }
+
+    clearAll(): void {
+        filters.clearAllCategory();
+        filters.updateproductFilter();
+        filters.updateNumFiler();
+        filters.updateNumberCatagorySelected();
+    }
+
+    products: Array<IProduct> = filters.getProductFilter;
+
+    listFilters: IListFilter = { ...filters.getAllFilter };
+
+    numCategory: number = filters.getNumberCatagorySelected;
+}
 </script>
 <style lang="scss" scoped>
 .list-view-catalog-banner {

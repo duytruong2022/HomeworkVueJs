@@ -42,47 +42,50 @@
 </template>
 <script lang="ts">
 import { carts } from '../../store';
-export default {
+import { Options, Vue } from 'vue-class-component';
+@Options({
     props: {
         product: Object,
     },
-    data() {
-        return {
-            pages: [
-                {
-                    name: 'About Product',
-                    link: 'about-product',
-                },
-                {
-                    name: 'Details',
-                    link: 'details-product',
-                },
-                {
-                    name: 'Specs',
-                    link: 'specs-product',
-                },
-            ],
-            numProduct: 1,
-            pageSelected: 'About Product',
-        };
-    },
-    methods: {
-        numProductUp(): void {
-            if (this.numProduct < 100) this.numProduct++;
+})
+export default class ProductTopbar extends Vue {
+    pages = [
+        {
+            name: 'About Product',
+            link: 'about-product',
         },
-        numProductDown(): void {
-            if (this.numProduct > 0) this.numProduct--;
+        {
+            name: 'Details',
+            link: 'details-product',
         },
-        selectPage(page: string): void {
-            this.pageSelected = page;
+        {
+            name: 'Specs',
+            link: 'specs-product',
         },
-        addToCart(id: string, num: number): void {
-            const el = { id: id, num: num };
-            carts.addToCart(el);
-            alert('success');
-        },
-    },
-};
+    ];
+
+    numProduct = 1;
+
+    pageSelected = 'About Product';
+
+    numProductUp(): void {
+        if (this.numProduct < 100) this.numProduct++;
+    }
+
+    numProductDown(): void {
+        if (this.numProduct > 0) this.numProduct--;
+    }
+
+    selectPage(page: string): void {
+        this.pageSelected = page;
+    }
+
+    addToCart(id: string, num: number): void {
+        const el = { id: id, num: num };
+        carts.addToCart(el);
+        alert('success');
+    }
+}
 </script>
 <style lang="scss" scoped>
 .prod-topbar {

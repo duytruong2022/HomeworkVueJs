@@ -51,36 +51,37 @@
 </template>
 
 <script lang="ts">
+import { Options, Vue } from 'vue-class-component';
 import { filters } from '../../store';
-export default {
+@Options({
     props: {
         filter: Object,
     },
-    data() {
-        return {
-            radio: '1',
-            isPlay: true,
-            isSelect: false,
-            selectedColor: 'red',
-        };
-    },
-    methods: {
-        compact(): void {
-            this.isPlay = !this.isPlay;
-        },
-        selectColor(color: string): void {
-            this.selectedColor = color;
-        },
-        addCategory(id: string): void {
-            filters.addCategory(id);
-            filters.updateNumFiler();
-        },
-        addPrice(id: string): void {
-            filters.addPrice(id);
-            filters.updateNumFiler();
-        },
-    },
-};
+})
+export default class CatalogeListViewFilter extends Vue {
+    radio = '1';
+    isPlay = true;
+    isSelect = false;
+    selectedColor = 'red';
+
+    compact(): void {
+        this.isPlay = !this.isPlay;
+    }
+
+    selectColor(color: string): void {
+        this.selectedColor = color;
+    }
+
+    addCategory(id: string): void {
+        filters.addCategory(id);
+        filters.updateNumFiler();
+    }
+
+    addPrice(id: string): void {
+        filters.addPrice(id);
+        filters.updateNumFiler();
+    }
+}
 </script>
 
 <style lang="scss" scoped>

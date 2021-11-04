@@ -41,42 +41,40 @@
 </template>
 
 <script lang="ts">
-export default {
-    data() {
-        return {
-            categorys: [
-                {
-                    name: 'Laptops',
-                    link: '#',
-                },
-                {
-                    name: 'Desktop PCs',
-                    link: '#',
-                },
-                {
-                    name: 'Networking Devices',
-                    link: '#',
-                },
-                {
-                    name: 'Printers & Scanners',
-                    link: '#',
-                },
-                {
-                    name: 'PC Parts',
-                    link: '#',
-                },
-                {
-                    name: 'All Other Products',
-                    link: '#',
-                },
-                {
-                    name: 'Repairs',
-                    link: '#',
-                },
-            ],
-        };
-    },
-};
+import { Vue } from 'vue-class-component';
+
+export default class TopBar extends Vue {
+    categorys = [
+        {
+            name: 'Laptops',
+            link: '#',
+        },
+        {
+            name: 'Desktop PCs',
+            link: '#',
+        },
+        {
+            name: 'Networking Devices',
+            link: '#',
+        },
+        {
+            name: 'Printers & Scanners',
+            link: '#',
+        },
+        {
+            name: 'PC Parts',
+            link: '#',
+        },
+        {
+            name: 'All Other Products',
+            link: '#',
+        },
+        {
+            name: 'Repairs',
+            link: '#',
+        },
+    ];
+}
 </script>
 
 <style lang="scss" scoped>

@@ -61,33 +61,32 @@
     </div>
 </template>
 <script lang="ts">
+import { Options, Vue } from 'vue-class-component';
 import { carts } from '../store';
 import { ICartItem } from '../type';
 import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';
 import ProductShoppingCart from '../components/ShoppingCart/ShoppngCartProduct.vue';
 import SummrayShoppingCart from '../components/ShoppingCart/ShoppingCartSummay.vue';
-export default {
+@Options({
     components: {
         Topbar,
         Contact,
         ProductShoppingCart,
         SummrayShoppingCart,
     },
-    methods: {
-        clearCart(): void {
-            carts.clearCart();
-        },
-        updateCart(): void {
-            carts.updateCart();
-        },
-    },
-    computed: {
-        products(): Array<ICartItem> {
-            return carts.getAlllistCarts;
-        },
-    },
-};
+})
+export default class ShoppingCart extends Vue {
+    clearCart(): void {
+        carts.clearCart();
+    }
+
+    updateCart(): void {
+        carts.updateCart();
+    }
+
+    products: Array<ICartItem> = carts.getAlllistCarts;
+}
 </script>
 <style lang="scss">
 .shopping-cart-breadcrumb {

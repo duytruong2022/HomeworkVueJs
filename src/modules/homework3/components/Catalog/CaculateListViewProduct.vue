@@ -105,19 +105,20 @@
 </template>
 <script lang="ts">
 import { carts } from '../../store';
-export default {
-    name: 'Product',
+import { Options, Vue } from 'vue-class-component';
+
+@Options({
     props: {
         product: Object,
     },
-    methods: {
-        addToCart(id: string): void {
-            const el = { id: id };
-            carts.addToCart(el);
-            alert('success');
-        },
-    },
-};
+})
+export default class CaculateListViewProduct extends Vue {
+    addToCart(id: string): void {
+        const el = { id: id };
+        carts.addToCart(el);
+        alert('success');
+    }
+}
 </script>
 <style lang="scss" scoped>
 .product {

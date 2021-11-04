@@ -52,23 +52,26 @@
     </div>
 </template>
 <script lang="ts">
+import { Options, Vue } from 'vue-class-component';
 import { carts } from '../../store';
-export default {
+@Options({
     props: {
         product: Object,
     },
-    methods: {
-        numProductUp(id: string): void {
-            carts.upQuantityCart(id);
-        },
-        numProductDown(id: string): void {
-            carts.downQuantityCart(id);
-        },
-        clearCartItem(id: string): void {
-            carts.clearCartItem(id);
-        },
-    },
-};
+})
+export default class ShoppngCartProduct extends Vue {
+    numProductUp(id: string): void {
+        carts.upQuantityCart(id);
+    }
+
+    numProductDown(id: string): void {
+        carts.downQuantityCart(id);
+    }
+
+    clearCartItem(id: string): void {
+        carts.clearCartItem(id);
+    }
+}
 </script>
 
 <style lang="scss" scoped>

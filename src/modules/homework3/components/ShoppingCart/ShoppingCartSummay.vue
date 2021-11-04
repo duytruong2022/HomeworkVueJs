@@ -41,58 +41,14 @@
 </template>
 <script lang="ts">
 import { ICustomerInfo } from '../../type';
+import { Options, Vue } from 'vue-class-component';
 import ShoppingCartShippingTax from './ShoppingCartShippingTax.vue';
 import ShoppingCartDistcount from './ShoppingCartDistcount.vue';
 import { carts } from '../../store';
-export default {
+@Options({
     components: {
         ShoppingCartShippingTax,
         ShoppingCartDistcount,
-    },
-    data() {
-        return {
-            shipping: 21,
-            orderTotal: 0,
-            gst: 0,
-            country: '',
-            state: '',
-            zip: '',
-        };
-    },
-    methods: {
-        changeShipping(label: string): void {
-            if (label === '2') this.shipping = 0;
-            else this.shipping = 21;
-        },
-        updateCountry(country: string): void {
-            this.country = country;
-        },
-        updateState(state: string): void {
-            this.state = state;
-        },
-        updateZip(zip: string): void {
-            this.zip = zip;
-        },
-        updateCustomerInfo(): void {
-            let shipping;
-            if (this.shipping) {
-                shipping = true;
-            } else {
-                shipping = false;
-            }
-            const info: ICustomerInfo = {
-                customerCountry: this.country,
-                customerState: this.state,
-                customerZip: this.zip,
-                shipping: shipping,
-            };
-            carts.updatedCustomerInfo(info);
-        },
-    },
-    computed: {
-        subtotal(): number {
-            return carts.getSumSubtotal;
-        },
     },
     watch: {
         subtotal(): void {
@@ -103,7 +59,49 @@ export default {
             this.orderTotal = this.subtotal + this.gst + this.shipping + 1.91;
         },
     },
-};
+})
+export default class ShoppingCartSummay extends Vue {
+    shipping = 21;
+    orderTotal = 0;
+    gst = 0;
+    country = '';
+    state = '';
+    zip = '';
+    subtotal = carts.getSumSubtotal;
+
+    changeShipping(label: string): void {
+        if (label === '2') this.shipping = 0;
+        else this.shipping = 21;
+    }
+
+    updateCountry(country: string): void {
+        this.country = country;
+    }
+
+    updateState(state: string): void {
+        this.state = state;
+    }
+
+    updateZip(zip: string): void {
+        this.zip = zip;
+    }
+
+    updateCustomerInfo(): void {
+        let shipping;
+        if (this.shipping) {
+            shipping = true;
+        } else {
+            shipping = false;
+        }
+        const info: ICustomerInfo = {
+            customerCountry: this.country,
+            customerState: this.state,
+            customerZip: this.zip,
+            shipping: shipping,
+        };
+        carts.updatedCustomerInfo(info);
+    }
+}
 </script>
 <style lang="scss" scoped>
 .summay-shopping-cart {

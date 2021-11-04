@@ -15,21 +15,20 @@
     </div>
 </template>
 <script lang="ts">
-export default {
+import { Options, Vue } from 'vue-class-component';
+
+@Options({
     props: {
         product: Object,
     },
-    data() {
-        return {
-            selectedColor: 'red',
-        };
-    },
-    methods: {
-        selectColor(color: string): void {
-            this.selectedColor = color;
-        },
-    },
-};
+})
+export default class ProductAbout extends Vue {
+    selectedColor = 'red';
+
+    selectColor(color: string): void {
+        this.selectedColor = color;
+    }
+}
 </script>
 <style lang="scss" scoped>
 .prod-about-product {

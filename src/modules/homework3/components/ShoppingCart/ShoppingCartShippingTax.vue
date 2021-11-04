@@ -44,34 +44,9 @@
     </div>
 </template>
 <script lang="ts">
-export default {
-    data() {
-        return {
-            options: [
-                {
-                    value: 'Việt Nam',
-                    label: 'Việt Nam',
-                },
-                {
-                    value: 'Australia',
-                    label: 'Australia',
-                },
-            ],
-            country: '',
-            state: '',
-            zip: '',
-            radio: '1',
-            isPlay: false,
-        };
-    },
-    methods: {
-        compact(): void {
-            this.isPlay = !this.isPlay;
-        },
-        chooseShipping(label: string): void {
-            this.$emit('update-shipping', label);
-        },
-    },
+import { Options, Vue } from 'vue-class-component';
+
+@Options({
     watch: {
         country(): void {
             this.$emit('update-country', this.country);
@@ -83,7 +58,33 @@ export default {
             this.$emit('update-zip', this.zip);
         },
     },
-};
+})
+export default class ShoppingCartShippingTax extends Vue {
+    options = [
+        {
+            value: 'Việt Nam',
+            label: 'Việt Nam',
+        },
+        {
+            value: 'Australia',
+            label: 'Australia',
+        },
+    ];
+
+    country = '';
+    state = '';
+    zip = '';
+    radio = '1';
+    isPlay = false;
+
+    compact(): void {
+        this.isPlay = !this.isPlay;
+    }
+
+    chooseShipping(label: string): void {
+        this.$emit('update-shipping', label);
+    }
+}
 </script>
 <style lang="scss" scoped>
 .shopping-cart-shipping-tax {

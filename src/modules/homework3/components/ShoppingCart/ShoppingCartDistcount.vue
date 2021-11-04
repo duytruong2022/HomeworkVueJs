@@ -18,19 +18,16 @@
     </div>
 </template>
 <script lang="ts">
-export default {
-    data() {
-        return {
-            input: '',
-            isPlay: true,
-        };
-    },
-    methods: {
-        compact(): void {
-            this.isPlay = !this.isPlay;
-        },
-    },
-};
+import { Vue } from 'vue-class-component';
+
+export default class ShoppingCartDistcount extends Vue {
+    input = '';
+    isPlay = true;
+
+    compact(): void {
+        this.isPlay = !this.isPlay;
+    }
+}
 </script>
 <style lang="scss" scoped>
 .shopping-cart-distcount {

@@ -22,31 +22,33 @@
 </template>
 
 <script lang="ts">
-import Filter from './CatalogeListViewFilter.vue';
+import Filter from './CaculateListViewFilter.vue';
 import { filters } from '../../store';
+import { Options, Vue } from 'vue-class-component';
 
-export default {
+@Options({
     components: {
         Filter,
     },
     props: {
         listFiler: Object,
     },
-    methods: {
-        clearFilter(): void {
-            filters.clearAllCategory();
-            filters.updateproductFilter();
-            filters.updateNumFiler();
-            filters.updateNumberCatagorySelected();
-        },
-        updateFilter(): void {
-            filters.updateFilter();
-            filters.updateproductFilter();
-            filters.updateNumFiler();
-            filters.updateNumberCatagorySelected();
-        },
-    },
-};
+})
+export default class CatalogeListViewListFilter extends Vue {
+    clearFilter(): void {
+        filters.clearAllCategory();
+        filters.updateproductFilter();
+        filters.updateNumFiler();
+        filters.updateNumberCatagorySelected();
+    }
+
+    updateFilter(): void {
+        filters.updateFilter();
+        filters.updateproductFilter();
+        filters.updateNumFiler();
+        filters.updateNumberCatagorySelected();
+    }
+}
 </script>
 
 <style lang="scss" scoped>

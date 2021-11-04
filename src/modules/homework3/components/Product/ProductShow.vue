@@ -30,11 +30,14 @@
 </template>
 
 <script lang="ts">
-export default {
+import { Options, Vue } from 'vue-class-component';
+
+@Options({
     props: {
         product: Object,
     },
-};
+})
+export default class ProductShow extends Vue {}
 </script>
 <style lang="scss" scoped>
 .product-show {
