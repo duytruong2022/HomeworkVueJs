@@ -4,7 +4,7 @@
             <el-col :md="4" :lg="4" :xl="4">
                 <router-link
                     class="product_img"
-                    :to="{ name: 'product-info', params: { id: product.id } }"
+                    :to="{ name: 'about-product', params: { id: product.id } }"
                 >
                     <img
                         class="product-shopping-cart-img"
@@ -73,9 +73,9 @@ export default {
 
 <style lang="scss" scoped>
 .product-shopping-cart {
+    padding: 25px 4px 25px 0px;
     border-top: 1px solid #cacdd8;
     border-bottom: 1px solid #cacdd8;
-    padding: 25px 4px 25px 0px;
     .product-shopping-cart-img {
         width: 80%;
     }

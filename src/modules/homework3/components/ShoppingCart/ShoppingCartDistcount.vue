@@ -17,7 +17,7 @@
         </div>
     </div>
 </template>
-<script>
+<script lang="ts">
 export default {
     data() {
         return {
@@ -26,7 +26,7 @@ export default {
         };
     },
     methods: {
-        compact() {
+        compact(): void {
             this.isPlay = !this.isPlay;
         },
     },
@@ -40,6 +40,7 @@ export default {
     margin-bottom: 29px;
     .distcount {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         margin-right: 3%;
         font-family: Poppins;
@@ -48,7 +49,6 @@ export default {
         font-size: 18px;
         line-height: 27px;
         color: #000000;
-        justify-content: space-between;
         .distcount-drop-icon {
             font-size: 14px;
             line-height: 15px;

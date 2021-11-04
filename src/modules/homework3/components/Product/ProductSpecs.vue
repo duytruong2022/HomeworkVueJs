@@ -1,30 +1,29 @@
 <template>
     <div class="prod_specs">
-        <div class="prod_CPU">
-            <div class="prod_name_info">CPU</div>
-            <div>{{ product.CPU }}</div>
+        <div class="prod_CPU info">
+            <div class="prod_name_info info">CPU</div>
+            <div class="info">{{ product.CPU }}</div>
         </div>
-        <div class="prod_Featured">
-            <div class="prod_name_info">Featured</div>
-            <div>{{ product.Featured }}</div>
+        <div class="prod_Featured info">
+            <div class="prod_name_info info">Featured</div>
+            <div class="info">{{ product.Featured }}</div>
         </div>
-        <div class="prod_IOPorts">
-            <div class="prod_name_info">I/O Ports</div>
-            <div>{{ product.IOPorts }}</div>
+        <div class="prod_IOPorts info">
+            <div class="prod_name_info info">I/O Ports</div>
+            <div class="info">{{ product.IOPorts }}</div>
         </div>
     </div>
 </template>
 
-<script>
-import { object } from 'yup/lib/locale';
+<script lang="ts">
 export default {
     props: {
-        product: object,
+        product: Object,
     },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .prod_specs {
     width: 70%;
     margin-bottom: 20px;
@@ -37,9 +36,9 @@ export default {
     color: #000000;
     background-color: #ffffff;
     border: 1px solid #cacdd8;
-    div {
-        margin-top: 6px;
-        margin-bottom: 6px;
+    .info {
+        padding-top: 6px;
+        padding-bottom: 6px;
         padding-left: 8px;
         display: flex;
         .prod_name_info {

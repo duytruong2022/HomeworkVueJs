@@ -69,3 +69,10 @@ export interface IListFilter {
     color: IColor;
     filterName: IFilterName;
 }
+
+export interface ICustomerInfo {
+    customerCountry: string;
+    customerState: string;
+    customerZip: string;
+    shipping: boolean;
+}

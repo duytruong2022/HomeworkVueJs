@@ -147,14 +147,14 @@ export default {
             border-radius: 50px;
         }
         .shopping-button {
-            border: 2px solid #a2a6b0;
-            color: #a2a6b0;
-            background: none;
             margin-right: 10px;
+            color: #a2a6b0;
+            border: 2px solid #a2a6b0;
+            background: none;
         }
         .cart-button {
-            border: none;
             color: #ffffff;
+            border: none;
             background-color: #000000;
         }
     }

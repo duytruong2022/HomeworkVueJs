@@ -3,20 +3,20 @@
         <div class="filters">Filters</div>
         <button
             type="button"
-            class="btn btn-outline-secondary rounded-pill"
+            class="filter-button btn btn-outline-secondary rounded-pill"
             @click="clearFilter()"
         >
-            <div>Clear Filter</div>
+            <div class="button-title">Clear Filter</div>
         </button>
         <div class="list_filter">
             <Filter v-for="(filter, index) in listFiler" :key="index" :filter="filter" />
         </div>
         <button
             type="button"
-            class="btn btn-primary btn-lg btn-block rounded-pill"
+            class="filter-button btn btn-primary btn-lg btn-block rounded-pill"
             @click="updateFilter()"
         >
-            <div>Apply Filter ({{ listFiler.filterName.num }})</div>
+            <div class="button-title">Apply Filter ({{ listFiler.filterName.num }})</div>
         </button>
     </div>
 </template>
@@ -33,10 +33,10 @@ export default {
         listFiler: Object,
     },
     methods: {
-        clearFilter() {
+        clearFilter(): void {
             filters.clearAllCategory();
         },
-        updateFilter() {
+        updateFilter(): void {
             filters.updateFilter();
             filters.updateproductFilter();
             filters.updateNumFiler();
@@ -45,12 +45,13 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .menu {
     background-color: #f5f7ff;
     padding-bottom: 13px;
-    button {
+    .filter-button {
         width: 85.5%;
+        margin-top: 13px;
         margin-left: 6.8%;
         margin-right: 7.7%;
         font-family: Poppins;
@@ -58,27 +59,25 @@ export default {
         font-weight: 600;
         font-size: 14px;
         line-height: 21px;
-        display: flex;
         align-items: center;
         text-align: center;
-        margin-top: 13px;
-        div {
+        .button-title {
             width: 100%;
         }
     }
     .filters {
         width: 100%;
+        padding-top: 13px;
+        display: flex;
+        justify-content: center;
         font-family: Poppins;
         font-style: normal;
         font-weight: bold;
         font-size: 16px;
         line-height: 24px;
-        display: flex;
         align-items: center;
         text-align: center;
         color: #000000;
-        justify-content: center;
-        padding-top: 13px;
     }
 }
 </style>

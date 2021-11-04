@@ -12,7 +12,7 @@
             Enter your destination to get a shipping estimate.
         </div>
         <div v-show="isPlay">
-            <el-select v-model="value" placeholder="Choose your country">
+            <el-select v-model="country" placeholder="Choose your country">
                 <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -24,12 +24,12 @@
             <div class="shipping-tax-option">State/Province</div>
             <el-input
                 placeholder="Enter your state or province"
-                v-model="input"
+                v-model="state"
             ></el-input>
             <div class="shipping-tax-option">Zip/Postal Code</div>
             <el-input
                 placeholder="Enter your zip or postal code"
-                v-model="input"
+                v-model="zip"
             ></el-input>
             <div class="shipping-tax-option">Standard Rate</div>
             <el-radio v-model="radio" label="1" @change="chooseShipping">
@@ -43,44 +43,44 @@
         </div>
     </div>
 </template>
-<script>
+<script lang="ts">
 export default {
     data() {
         return {
             options: [
                 {
-                    value: 'Option1',
-                    label: 'Option1',
+                    value: 'Việt Nam',
+                    label: 'Việt Nam',
                 },
                 {
-                    value: 'Option2',
-                    label: 'Option2',
-                },
-                {
-                    value: 'Option3',
-                    label: 'Option3',
-                },
-                {
-                    value: 'Option4',
-                    label: 'Option4',
-                },
-                {
-                    value: 'Option5',
-                    label: 'Option5',
+                    value: 'Australia',
+                    label: 'Australia',
                 },
             ],
-            value: '',
-            input: '',
+            country: '',
+            state: '',
+            zip: '',
             radio: '1',
             isPlay: false,
         };
     },
     methods: {
-        compact() {
+        compact(): void {
             this.isPlay = !this.isPlay;
         },
-        chooseShipping(label) {
+        chooseShipping(label: string): void {
             this.$emit('update-shipping', label);
+        },
+    },
+    watch: {
+        country(): void {
+            this.$emit('update-country', this.country);
+        },
+        state(): void {
+            this.$emit('update-state', this.state);
+        },
+        zip(): void {
+            this.$emit('update-zip', this.zip);
         },
     },
 };

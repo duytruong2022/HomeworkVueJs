@@ -1,7 +1,12 @@
 <template>
     <div class="summay-shopping-cart">
         <div class="summay-shopping-cart-title">Summary</div>
-        <ShoppingCartShippingTax @update-shipping="changeShipping" />
+        <ShoppingCartShippingTax
+            @update-shipping="changeShipping"
+            @update-country="updateCountry"
+            @update-state="updateState"
+            @update-zip="updateZip"
+        />
         <ShoppingCartDistcount />
         <div class="shopping-cart-subtotal">
             <div class="cart-price">
@@ -28,11 +33,14 @@
                 Order Total
                 <div>${{ orderTotal }}</div>
             </div>
-            <button class="cart-checkout-button">Proceed to Checkout</button>
+            <button class="cart-checkout-button" @click="updateCustomerInfo()">
+                Proceed to Checkout
+            </button>
         </div>
     </div>
 </template>
-<script>
+<script lang="ts">
+import { ICustomerInfo } from '../../type';
 import ShoppingCartShippingTax from './ShoppingCartShippingTax.vue';
 import ShoppingCartDistcount from './ShoppingCartDistcount.vue';
 import { carts } from '../../store';
@@ -46,25 +54,52 @@ export default {
             shipping: 21,
             orderTotal: 0,
             gst: 0,
+            country: '',
+            state: '',
+            zip: '',
         };
     },
     methods: {
-        changeShipping(label) {
+        changeShipping(label: string): void {
             if (label === '2') this.shipping = 0;
             else this.shipping = 21;
         },
+        updateCountry(country: string): void {
+            this.country = country;
+        },
+        updateState(state: string): void {
+            this.state = state;
+        },
+        updateZip(zip: string): void {
+            this.zip = zip;
+        },
+        updateCustomerInfo(): void {
+            let shipping;
+            if (this.shipping) {
+                shipping = true;
+            } else {
+                shipping = false;
+            }
+            const info: ICustomerInfo = {
+                customerCountry: this.country,
+                customerState: this.state,
+                customerZip: this.zip,
+                shipping: shipping,
+            };
+            carts.updatedCustomerInfo(info);
+        },
     },
     computed: {
-        subtotal() {
+        subtotal(): number {
             return carts.getSumSubtotal;
         },
     },
     watch: {
-        subtotal() {
+        subtotal(): void {
             this.gst = 0.1 * this.subtotal;
             this.orderTotal = this.subtotal + this.gst + this.shipping + 1.91;
         },
-        shipping() {
+        shipping(): void {
             this.orderTotal = this.subtotal + this.gst + this.shipping + 1.91;
         },
     },

@@ -1,11 +1,11 @@
 <template>
-    <div class="prod_about_product">
-        <div class="prod_description">{{ product.description }}</div>
-        <ul class="prod_color">
+    <div class="prod-about-product">
+        <div class="prod-description">{{ product.description }}</div>
+        <ul class="prod-color">
             <li
                 v-for="(color, index) in product.colors"
                 :key="index"
-                class="color_bd"
+                class="color-bd"
                 :class="{ boder: color == selectedColor }"
                 @click="selectColor(color)"
             >
@@ -14,11 +14,10 @@
         </ul>
     </div>
 </template>
-<script>
-import { object } from 'yup/lib/locale';
+<script lang="ts">
 export default {
     props: {
-        product: object,
+        product: Object,
     },
     data() {
         return {
@@ -26,32 +25,48 @@ export default {
         };
     },
     methods: {
-        selectColor(color) {
+        selectColor(color: string): void {
             this.selectedColor = color;
         },
     },
 };
 </script>
-<style lang="scss">
-.prod_about_product {
-    .prod_description {
+<style lang="scss" scoped>
+.prod-about-product {
+    .prod-description {
         margin-top: 12px;
         margin-bottom: 23px;
+        display: flex;
         font-family: Poppins;
         font-style: normal;
         font-weight: 300;
         font-size: 18px;
         line-height: 30px;
-        display: flex;
         align-items: center;
         color: #000000;
     }
-    .prod_color {
-        display: flex;
-        list-style: none;
-        margin-top: 23px;
-        padding: 0px;
-        margin-bottom: 0px;
+}
+.prod-color {
+    display: flex;
+    list-style: none;
+    margin-top: 23px;
+    padding: 0px;
+    margin-bottom: 0px;
+    .color-bd {
+        width: 32px;
+        height: 32px;
+        margin-right: 7px;
+        text-align: center;
+        border-radius: 50%;
+        .color {
+            width: 24px;
+            height: 24px;
+            margin: 2px;
+            border-radius: 50%;
+        }
+    }
+    .boder {
+        border: 2px solid #0156ff;
     }
 }
 </style>

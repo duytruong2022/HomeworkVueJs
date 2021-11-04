@@ -50,12 +50,11 @@
     </div>
 </template>
 
-<script>
-import { object } from 'yup/lib/locale';
+<script lang="ts">
 import { filters } from '../../store';
 export default {
     props: {
-        filter: object,
+        filter: Object,
     },
     data() {
         return {
@@ -66,17 +65,17 @@ export default {
         };
     },
     methods: {
-        compact() {
+        compact(): void {
             this.isPlay = !this.isPlay;
         },
-        selectColor(color) {
+        selectColor(color: string): void {
             this.selectedColor = color;
         },
-        addCategory(id) {
+        addCategory(id: string): void {
             filters.addCategory(id);
             filters.updateNumFiler();
         },
-        addPrice(id) {
+        addPrice(id: string): void {
             filters.addPrice(id);
             filters.updateNumFiler();
         },
@@ -84,23 +83,22 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .filter_title {
+    margin-left: 6.8%;
+    margin-top: 17px;
+    margin-right: 8.5%;
+    display: flex;
+    justify-content: space-between;
     font-family: Poppins;
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    display: flex;
     align-items: center;
     color: #000000;
-    margin-left: 6.8%;
-    margin-right: 8.5%;
-    justify-content: space-between;
-    margin-top: 17px;
 }
 .list_options {
-    list-style: none;
     padding: 0px;
     margin-top: 6px;
     font-family: Poppins;
@@ -110,32 +108,31 @@ export default {
     line-height: 210%;
     align-items: center;
     color: #000000;
-}
-.op {
-    margin-left: 6.8%;
-    margin-right: 8.5%;
-    display: flex;
-    justify-content: space-between;
+    .op {
+        margin-left: 6.8%;
+        margin-right: 8.5%;
+        display: flex;
+        justify-content: space-between;
+    }
 }
 .list_color {
-    list-style: none;
     padding: 0px;
     display: flex;
     margin-left: 6.8%;
     margin-right: 8.5%;
     margin-top: 10px;
-}
-.color_bd {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    margin-right: 7px;
-    text-align: center;
-    .color {
-        width: 24px;
-        height: 24px;
+    .color_bd {
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
-        margin: 2px;
+        margin-right: 7px;
+        text-align: center;
+        .color {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin: 2px;
+        }
     }
 }
 

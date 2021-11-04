@@ -40,7 +40,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .contact {
     height: 44px;
     text-align: center;
@@ -60,17 +60,6 @@
             line-height: 18px;
             align-items: center;
             color: #a2a6b0;
-        }
-        .contact-time .el-input__inner {
-            color: red;
-            background-color: #000;
-            border: none;
-        }
-        .contact-time .el-input__suffix {
-            left: 55px;
-        }
-        .el-select .el-input .el-select__caret {
-            color: white;
         }
     }
     .contact-address {

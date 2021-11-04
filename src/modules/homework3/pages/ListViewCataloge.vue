@@ -91,12 +91,13 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';
 import ListFiler from '../components/Catalog/CatalogeListViewListFilter.vue';
 import CaculeteProdu from '../components/Catalog/CaculateListViewProduct.vue';
 import { filters } from '../store';
+import { IListFilter, IProduct } from '../type';
 export default {
     components: {
         Topbar,
@@ -105,21 +106,21 @@ export default {
         CaculeteProdu,
     },
     methods: {
-        clearCategory(id) {
+        clearCategory(id: string): void {
             filters.clearCategory(id);
             filters.updateFilter();
             filters.updateproductFilter();
             filters.updateNumFiler();
         },
-        clearAll() {
+        clearAll(): void {
             filters.clearAllCategory();
         },
     },
     computed: {
-        products() {
+        products(): Array<IProduct> {
             return filters.getProductFilter;
         },
-        listFilters() {
+        listFilters(): IListFilter {
             return { ...filters.getAllFilter };
         },
     },
@@ -144,7 +145,6 @@ export default {
     font-weight: normal;
     font-size: 12px;
     line-height: 18px;
-    display: flex;
     align-items: center;
     text-align: center;
     color: #000000;
