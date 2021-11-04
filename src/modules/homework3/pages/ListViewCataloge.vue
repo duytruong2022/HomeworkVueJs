@@ -97,8 +97,8 @@
 <script>
 import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';
-import ListFiler from '../components/Catalog/ListFilterListViewCataloge.vue';
-import CaculeteProdu from '../components/Catalog/ProductListViewCaculate.vue';
+import ListFiler from '../components/Catalog/CatalogeListViewListFilter.vue';
+import CaculeteProdu from '../components/Catalog/CaculateListViewProduct.vue';
 import { product } from '../store';
 export default {
     components: {

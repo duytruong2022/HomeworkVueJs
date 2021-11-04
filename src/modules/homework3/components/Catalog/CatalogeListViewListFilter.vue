@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import Filter from './FilterListViewCataloge.vue';
+import Filter from './CatalogeListViewFilter.vue';
 import { product } from '../../store';
 
 export default {

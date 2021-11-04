@@ -65,7 +65,7 @@ import { product } from '../store';
 import { ICartItem } from '../type';
 import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';
-import ProductShoppingCart from '../components/ShoppingCart/ProductShoppngCart.vue';
+import ProductShoppingCart from '../components/ShoppingCart/ShoppngCartProduct.vue';
 import SummrayShoppingCart from '../components/ShoppingCart/SummayShoppingCart.vue';
 export default {
     components: {

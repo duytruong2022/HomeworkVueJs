@@ -2,9 +2,9 @@ import { RouteRecordRaw } from 'vue-router';
 import homework3 from './pages/ListViewCataloge.vue';
 import Product from './pages/Product.vue';
 import Cart from './pages/ShoppingCart.vue';
-import AboutProduct from './components/Product/AboutProduct.vue';
-import ProductDetails from './components/Product/DetailsProduct.vue';
-import ProductSpecs from './components/Product/SpecsProduct.vue';
+import AboutProduct from './components/Product/ProductAbout.vue';
+import ProductDetails from './components/Product/ProductDetails.vue';
+import ProductSpecs from './components/Product/ProductSpecs.vue';
 
 export default [
     {

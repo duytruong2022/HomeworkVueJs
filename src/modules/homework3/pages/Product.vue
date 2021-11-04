@@ -23,9 +23,9 @@
 import { product } from '../store';
 import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';
-import ProdTopbar from '../components/Product/TopbarProduct.vue';
-import ProdInfo from '../components/Product/InfomationProduct.vue';
-import ProdShow from '../components/Product/ShowProduct.vue';
+import ProdTopbar from '../components/Product/ProductTopbar.vue';
+import ProdInfo from '../components/Product/ProductInfomation.vue';
+import ProdShow from '../components/Product/ProductShow.vue';
 export default {
     components: {
         Topbar,
