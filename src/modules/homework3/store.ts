@@ -152,7 +152,7 @@ class Carts extends VuexModule {
     listCarts: Array<ICartItem> = [
         {
             id: '1',
-            image: 'product/product.png',
+            image: 'product/1_1.png',
             description:
                 'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
             price: 1000,
@@ -346,12 +346,24 @@ class Filters extends VuexModule {
 
     productFilter: Array<IProduct> = product.products;
 
+    numberCatagorySelected = 0;
+
     get getAllFilter() {
         return this.listFiler;
     }
 
     get getProductFilter() {
         return this.productFilter;
+    }
+
+    get getNumberCatagorySelected() {
+        return this.numberCatagorySelected;
+    }
+
+    @Mutation
+    updateNumberCatagorySelected() {
+        this.numberCatagorySelected
+            = this.listFiler.filterName.listCategorys?.length ?? 0;
     }
 
     @Mutation
@@ -424,7 +436,6 @@ class Filters extends VuexModule {
         ) {
             this.productFilter = product.products;
         } else {
-            debugger;
             let listProduct = product.products;
             if (
                 this.listFiler.filterName.listCategorys &&

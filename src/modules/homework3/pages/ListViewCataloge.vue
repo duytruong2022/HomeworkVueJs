@@ -74,7 +74,11 @@
                                 />
                             </div>
                         </div>
-                        <div class="list-view-catalog-product-op-box" @click="clearAll()">
+                        <div
+                            class="list-view-catalog-product-op-box"
+                            @click="clearAll()"
+                            v-show="numCategory"
+                        >
                             Clear All
                         </div>
                     </div>
@@ -114,6 +118,9 @@ export default {
         },
         clearAll(): void {
             filters.clearAllCategory();
+            filters.updateproductFilter();
+            filters.updateNumFiler();
+            filters.updateNumberCatagorySelected();
         },
     },
     computed: {
@@ -122,6 +129,9 @@ export default {
         },
         listFilters(): IListFilter {
             return { ...filters.getAllFilter };
+        },
+        numCategory(): number {
+            return filters.getNumberCatagorySelected;
         },
     },
 };

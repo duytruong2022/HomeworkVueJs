@@ -35,11 +35,15 @@ export default {
     methods: {
         clearFilter(): void {
             filters.clearAllCategory();
+            filters.updateproductFilter();
+            filters.updateNumFiler();
+            filters.updateNumberCatagorySelected();
         },
         updateFilter(): void {
             filters.updateFilter();
             filters.updateproductFilter();
             filters.updateNumFiler();
+            filters.updateNumberCatagorySelected();
         },
     },
 };
