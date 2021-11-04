@@ -19,7 +19,7 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
 import { product } from '../store';
 import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';

@@ -52,6 +52,7 @@
 
 <script>
 import { object } from 'yup/lib/locale';
+import { product } from '../../store';
 export default {
     props: {
         filter: object,
@@ -72,12 +73,10 @@ export default {
             this.selectedColor = color;
         },
         addCategory(id) {
-            this.$emit('add-category', id);
-            console.log(id);
+            product.addCategory(id);
         },
         addPrice(id) {
-            this.$emit('add-price', id);
-            console.log(id);
+            product.addPrice(id);
         },
     },
 };

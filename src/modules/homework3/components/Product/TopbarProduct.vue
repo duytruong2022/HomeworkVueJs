@@ -40,7 +40,7 @@
         </el-row>
     </div>
 </template>
-<script lang="ts">
+<script>
 import { product } from '../../store';
 export default {
     props: {
@@ -67,16 +67,16 @@ export default {
         };
     },
     methods: {
-        numProductUp(): void {
+        numProductUp() {
             if (this.numProduct < 100) this.numProduct++;
         },
-        numProductDown(): void {
+        numProductDown() {
             if (this.numProduct > 0) this.numProduct--;
         },
-        selectPage(page: string): void {
+        selectPage(page) {
             this.pageSelected = page;
         },
-        addToCart(id: string, num: number): void {
+        addToCart(id, num) {
             const el = { id: id, num: num };
             product.addToCart(el);
             alert('success');

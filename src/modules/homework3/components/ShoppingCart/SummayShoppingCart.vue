@@ -32,7 +32,7 @@
         </div>
     </div>
 </template>
-<script lang="ts">
+<script>
 import ShoppingCartShippingTax from './ShoppingCartShippingTax.vue';
 import ShoppingCartDistcount from './ShoppingCartDistcount.vue';
 import { product } from '../../store';
@@ -49,22 +49,22 @@ export default {
         };
     },
     methods: {
-        changeShipping(label: string): void {
+        changeShipping(label) {
             if (label === '2') this.shipping = 0;
             else this.shipping = 21;
         },
     },
     computed: {
-        subtotal(): number {
+        subtotal() {
             return product.getSumSubtotal;
         },
     },
     watch: {
-        subtotal(): void {
+        subtotal() {
             this.gst = 0.1 * this.subtotal;
             this.orderTotal = this.subtotal + this.gst + this.shipping + 1.91;
         },
-        shipping(): void {
+        shipping() {
             this.orderTotal = this.subtotal + this.gst + this.shipping + 1.91;
         },
     },

@@ -21,13 +21,7 @@
         <div class="list-view-catalog-layouts">
             <el-row :gutter="6">
                 <el-col :md="5" :lg="5" :xl="5">
-                    <ListFiler
-                        :listFiler="listFilters"
-                        @add-category="addCategory"
-                        @add-price="addPrice"
-                        @clear-filter="clearAll"
-                        @update-filter="updateFilter"
-                    />
+                    <ListFiler :listFiler="listFilters" />
                 </el-col>
                 <el-col :md="19" :lg="19" :xl="19">
                     <div class="list-view-catalog-product-header">
@@ -115,55 +109,16 @@ export default {
     },
     methods: {
         clearCategory(id) {
-            for (const l of this.listFilters.category.listCategorys) {
-                if (l.id === id) {
-                    l.selected = false;
-                }
-            }
+            product.clearCategory(id);
         },
         clearAll() {
-            for (const l of this.listFilters.category.listCategorys) {
-                l.selected = false;
-            }
-            for (const l of this.listFilters.price.listPrices) {
-                l.selected = false;
-            }
-            this.listFilters.filterName.listCategorys = [];
-            this.listFilters.filterName.listPrices = [];
-        },
-        addCategory(id) {
-            for (const l of this.listFilters.category.listCategorys) {
-                if (l.id === id) {
-                    l.selected = true;
-                }
-            }
-        },
-        addPrice(id) {
-            for (const l of this.listFilters.price.listPrices) {
-                if (l.id === id) {
-                    l.selected = true;
-                    console.log('a');
-                }
-            }
-            console.log(id);
-        },
-        updateFilter() {
-            const f = this.listFilters.category.listCategorys.filter(
-                (item) => item.selected === true,
-            );
-            this.listFilters.filterName.listCategorys = f;
-            const g = this.listFilters.price.listPrices.filter(
-                (item) => item.selected === true,
-            );
-            this.listFilters.filterName.listPrices = g;
+            product.clearAllCategory();
         },
     },
     watch: {
         listFiler: {
             handler: function () {
-                this.listFilters.filterName.num =
-                    this.listFilters.filterName.listCategorys.length +
-                    this.listFilters.filterName.listPrices.length;
+                product.updateNumFiler();
                 console.log('test');
             },
             deep: true,

@@ -9,13 +9,7 @@
             <div>Clear Filter</div>
         </button>
         <div class="list_filter">
-            <Filter
-                v-for="(filter, index) in listFiler"
-                :key="index"
-                :filter="filter"
-                @add-category="addCategory"
-                @add-price="addPrice"
-            />
+            <Filter v-for="(filter, index) in listFiler" :key="index" :filter="filter" />
         </div>
         <button type="button" class="btn btn-primary btn-lg btn-block rounded-pill">
             <div @click="updateFilter()">
@@ -27,6 +21,7 @@
 
 <script lang="ts">
 import Filter from './FilterListViewCataloge.vue';
+import { product } from '../../store';
 
 export default {
     components: {
@@ -36,18 +31,12 @@ export default {
         listFiler: Object,
     },
     methods: {
-        addCategory(id: string): void {
-            this.$emit('add-category', id);
+        clearFilter() {
+            product.clearAllCategory();
         },
-        addPrice(id: string): void {
-            this.$emit('add-price', id);
-        },
-        clearFilter(): void {
-            this.$emit('clear-filter');
-        },
-        updateFilter(): void {
-            this.$emit('update-filter');
-        },
+        updateFilter() {
+            product.updateFilter();
+        }
     },
 };
 </script>

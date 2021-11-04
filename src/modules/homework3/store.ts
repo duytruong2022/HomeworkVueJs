@@ -293,7 +293,7 @@ class Product extends VuexModule {
     }
 
     @Mutation
-    clearAll(): void {
+    clearAllCategory(): void {
         for (const l of this.listFiler.category.listCategorys) {
             l.selected = false;
         }
@@ -318,7 +318,6 @@ class Product extends VuexModule {
         for (const l of this.listFiler.price.listPrices) {
             if (l.id === id) {
                 l.selected = true;
-                console.log('a');
             }
         }
         console.log(id);
@@ -334,6 +333,14 @@ class Product extends VuexModule {
             (item) => item.selected === true,
         );
         this.listFiler.filterName.listPrices = g as any;
+    }
+
+    @Mutation
+    updateNumFiler() {
+        this.listFiler.filterName.num =
+            this.listFiler.filterName.listCategorys.length +
+            this.listFiler.filterName.listPrices.length;
+        console.log('test');
     }
 }
 
