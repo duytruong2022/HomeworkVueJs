@@ -19,6 +19,7 @@ export default [
         path: '/product/:id',
         name: 'product-info',
         component: Product,
+        props: true,
         meta: {
             public: true,
         },

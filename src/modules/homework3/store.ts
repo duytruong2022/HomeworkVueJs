@@ -362,8 +362,8 @@ class Filters extends VuexModule {
 
     @Mutation
     updateNumberCatagorySelected() {
-        this.numberCatagorySelected
-            = this.listFiler.filterName.listCategorys?.length ?? 0;
+        this.numberCatagorySelected =
+            this.listFiler.filterName.listCategorys?.length ?? 0;
     }
 
     @Mutation
@@ -414,6 +414,7 @@ class Filters extends VuexModule {
                 }
             }
         }
+        console.log(id);
     }
 
     @Mutation

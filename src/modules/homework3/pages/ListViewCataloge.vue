@@ -110,6 +110,17 @@ import { IListFilter, IProduct } from '../type';
         ListFiler,
         CaculeteProdu,
     },
+    computed: {
+        products(): Array<IProduct> {
+            return filters.getProductFilter;
+        },
+        listFilters(): IListFilter {
+            return { ...filters.getAllFilter };
+        },
+        numCategory(): number {
+            return filters.getNumberCatagorySelected;
+        },
+    },
 })
 export default class ListViewCaculate extends Vue {
     clearCategory(id: string): void {
@@ -126,12 +137,6 @@ export default class ListViewCaculate extends Vue {
         filters.updateNumFiler();
         filters.updateNumberCatagorySelected();
     }
-
-    products: Array<IProduct> = filters.getProductFilter;
-
-    listFilters: IListFilter = { ...filters.getAllFilter };
-
-    numCategory: number = filters.getNumberCatagorySelected;
 }
 </script>
 <style lang="scss" scoped>

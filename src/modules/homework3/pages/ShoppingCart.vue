@@ -75,6 +75,11 @@ import SummrayShoppingCart from '../components/ShoppingCart/ShoppingCartSummay.v
         ProductShoppingCart,
         SummrayShoppingCart,
     },
+    computed: {
+        products(): Array<ICartItem> {
+            return carts.getAlllistCarts;
+        },
+    },
 })
 export default class ShoppingCart extends Vue {
     clearCart(): void {
@@ -84,8 +89,6 @@ export default class ShoppingCart extends Vue {
     updateCart(): void {
         carts.updateCart();
     }
-
-    products: Array<ICartItem> = carts.getAlllistCarts;
 }
 </script>
 <style lang="scss">
