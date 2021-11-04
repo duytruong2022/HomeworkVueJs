@@ -59,6 +59,11 @@ import { carts } from '../../store';
             this.orderTotal = this.subtotal + this.gst + this.shipping + 1.91;
         },
     },
+    computed: {
+        subtotal(): number {
+            return carts.getSumSubtotal;
+        },
+    },
 })
 export default class ShoppingCartSummay extends Vue {
     shipping = 21;
@@ -67,7 +72,6 @@ export default class ShoppingCartSummay extends Vue {
     country = '';
     state = '';
     zip = '';
-    subtotal = carts.getSumSubtotal;
 
     changeShipping(label: string): void {
         if (label === '2') this.shipping = 0;
