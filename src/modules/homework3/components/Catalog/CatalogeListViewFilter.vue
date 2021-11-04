@@ -29,7 +29,7 @@
                 >
                     <div>
                         ${{ item.min }} <span v-if="!item.min">.00 </span>
-                        <span v-if="item.max">- ${{ item.max }}</span>
+                        <span v-if="item.max !== -1">- ${{ item.max }}</span>
                         <span v-else>And About</span>
                     </div>
                     <div>{{ item.quantity }}</div>
@@ -74,9 +74,11 @@ export default {
         },
         addCategory(id) {
             filters.addCategory(id);
+            filters.updateNumFiler();
         },
         addPrice(id) {
             filters.addPrice(id);
+            filters.updateNumFiler();
         },
     },
 };

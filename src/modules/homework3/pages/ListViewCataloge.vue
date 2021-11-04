@@ -62,10 +62,7 @@
                             v-for="(item, index) in listFilters.filterName.listCategorys"
                             :key="index"
                         >
-                            <div
-                                v-if="item.selected"
-                                class="list-view-catalog-product-op-box"
-                            >
+                            <div class="list-view-catalog-product-op-box">
                                 <div>{{ item.name }}</div>
                                 <div class="list-view-catalog-product-category-num">
                                     ({{ item.quantity }})
@@ -99,7 +96,7 @@ import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';
 import ListFiler from '../components/Catalog/CatalogeListViewListFilter.vue';
 import CaculeteProdu from '../components/Catalog/CaculateListViewProduct.vue';
-import { product, filters } from '../store';
+import { filters } from '../store';
 export default {
     components: {
         Topbar,
@@ -110,22 +107,17 @@ export default {
     methods: {
         clearCategory(id) {
             filters.clearCategory(id);
+            filters.updateFilter();
+            filters.updateproductFilter();
+            filters.updateNumFiler();
         },
         clearAll() {
             filters.clearAllCategory();
         },
     },
-    watch: {
-        listFiler: {
-            handler: function () {
-                filters.updateNumFiler();
-            },
-            deep: true,
-        },
-    },
     computed: {
         products() {
-            return product.getAllProduct;
+            return filters.getProductFilter;
         },
         listFilters() {
             return { ...filters.getAllFilter };

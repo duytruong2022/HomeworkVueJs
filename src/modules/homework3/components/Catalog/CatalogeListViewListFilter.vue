@@ -11,10 +11,12 @@
         <div class="list_filter">
             <Filter v-for="(filter, index) in listFiler" :key="index" :filter="filter" />
         </div>
-        <button type="button" class="btn btn-primary btn-lg btn-block rounded-pill">
-            <div @click="updateFilter()">
-                Apply Filter ({{ listFiler.filterName.num }})
-            </div>
+        <button
+            type="button"
+            class="btn btn-primary btn-lg btn-block rounded-pill"
+            @click="updateFilter()"
+        >
+            <div>Apply Filter ({{ listFiler.filterName.num }})</div>
         </button>
     </div>
 </template>
@@ -36,7 +38,9 @@ export default {
         },
         updateFilter() {
             filters.updateFilter();
-        }
+            filters.updateproductFilter();
+            filters.updateNumFiler();
+        },
     },
 };
 </script>

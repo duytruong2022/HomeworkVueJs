@@ -64,6 +64,9 @@ export default {
         numProductDown(id: string): void {
             carts.downQuantityCart(id);
         },
+        clearCartItem(id: string): void {
+            carts.clearCartItem(id);
+        },
     },
 };
 </script>

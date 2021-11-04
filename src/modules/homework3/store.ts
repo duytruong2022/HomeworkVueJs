@@ -1,6 +1,6 @@
 import { getModule, VuexModule, Mutation, Module } from 'vuex-module-decorators';
 import store from '@/store';
-import { ICartItem, IProduct } from './type';
+import { ICartItem, IProduct, IListFilter } from './type';
 
 @Module({ dynamic: true, namespaced: true, store, name: 'product' })
 class Product extends VuexModule {
@@ -9,7 +9,8 @@ class Product extends VuexModule {
             id: '1',
             img: ['product/product.png', 'product/1.png', 'product/product.png'],
             code: 'SKU D5515AI',
-            name: 'MSI MPG Trident 3 ',
+            name: 'MSI MPG Trident 1 ',
+            category: 'HP/COMPAQ PCS',
             description:
                 'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
             realPrice: 3300,
@@ -41,7 +42,8 @@ class Product extends VuexModule {
             id: '2',
             img: ['product/product.png', 'product/1.png', 'product/product.png'],
             code: 'SKU D5515AI',
-            name: 'MSI MPG Trident 3 ',
+            name: 'MSI MPG Trident 2 ',
+            category: 'MSI ALL-IN-ONE PCS',
             description:
                 'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
             realPrice: 3300,
@@ -73,6 +75,7 @@ class Product extends VuexModule {
             id: '3',
             img: ['product/product.png', 'product/1.png', 'product/product.png'],
             code: 'SKU D5515AI',
+            category: 'CUSTOM PCS',
             name: 'MSI MPG Trident 3 ',
             description:
                 'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
@@ -149,7 +152,6 @@ class Carts extends VuexModule {
     @Mutation
     addToCart(productAdd: { id: string; num?: number }): void {
         const cartItem = this.listCarts.find((item) => item.id === productAdd.id);
-        console.log(productAdd.num);
         if (cartItem) {
             cartItem.quantity += productAdd.num ?? 1;
             cartItem.subtotal += (productAdd.num ?? 1) * cartItem.price;
@@ -187,13 +189,19 @@ class Carts extends VuexModule {
             }
         }
     }
+
+    @Mutation
+    clearCartItem(id: string): void {
+        const listItem = this.listCarts.filter((item) => item.id !== id);
+        this.listCarts = listItem;
+    }
 }
 
 export const carts = getModule(Carts);
 
 @Module({ dynamic: true, namespaced: true, store, name: 'filter' })
 class Filters extends VuexModule {
-    listFiler = {
+    listFiler: IListFilter = {
         category: {
             title: 'Category',
             listCategorys: [
@@ -201,13 +209,13 @@ class Filters extends VuexModule {
                     id: '1',
                     name: 'CUSTOM PCS',
                     quantity: 15,
-                    selected: true,
+                    selected: false,
                 },
                 {
                     id: '2',
                     name: 'MSI ALL-IN-ONE PCS',
                     quantity: 45,
-                    selected: true,
+                    selected: false,
                 },
                 {
                     id: '3',
@@ -223,55 +231,56 @@ class Filters extends VuexModule {
                 {
                     id: '1',
                     min: 0,
-                    max: 1000000,
+                    max: 1000,
                     quantity: 19,
                     selected: false,
                 },
                 {
                     id: '2',
-                    min: 1000000,
-                    max: 2000000,
+                    min: 1000,
+                    max: 2000,
                     quantity: 21,
                     selected: false,
                 },
                 {
                     id: '3',
-                    min: 2000000,
-                    max: 3000000,
+                    min: 2000,
+                    max: 3000,
                     quantity: 9,
                     selected: false,
                 },
                 {
                     id: '4',
-                    min: 3000000,
-                    max: 4000000,
+                    min: 3000,
+                    max: 4000,
                     quantity: 6,
                     selected: false,
                 },
                 {
                     id: '5',
-                    min: 4000000,
-                    max: 5000000,
+                    min: 4000,
+                    max: 5000,
                     quantity: 3,
                     selected: false,
                 },
                 {
                     id: '6',
-                    min: 5000000,
-                    max: 6000000,
+                    min: 5000,
+                    max: 6000,
                     quantity: 1,
                     selected: false,
                 },
                 {
                     id: '7',
-                    min: 6000000,
-                    max: 7000000,
+                    min: 6000,
+                    max: 7000,
                     quantity: 1,
                     selected: false,
                 },
                 {
                     id: '8',
-                    min: 7000000,
+                    min: 7000,
+                    max: -1,
                     quantity: 1,
                     selected: false,
                 },
@@ -289,68 +298,132 @@ class Filters extends VuexModule {
         },
     };
 
+    productFilter: Array<IProduct> = product.products;
+
     get getAllFilter() {
         return this.listFiler;
     }
 
+    get getProductFilter() {
+        return this.productFilter;
+    }
+
     @Mutation
     clearCategory(id: string): void {
-        for (const l of this.listFiler.category.listCategorys) {
-            if (l.id === id) {
-                l.selected = false;
+        if (this.listFiler.category.listCategorys) {
+            for (const l of this.listFiler.category.listCategorys) {
+                if (l.id === id) {
+                    l.selected = false;
+                }
             }
         }
     }
 
     @Mutation
     clearAllCategory(): void {
-        for (const l of this.listFiler.category.listCategorys) {
-            l.selected = false;
+        if (this.listFiler.category.listCategorys) {
+            for (const l of this.listFiler.category.listCategorys) {
+                l.selected = false;
+            }
         }
-        for (const l of this.listFiler.price.listPrices) {
-            l.selected = false;
+        if (this.listFiler.price.listPrices) {
+            for (const l of this.listFiler.price.listPrices) {
+                l.selected = false;
+            }
         }
         this.listFiler.filterName.listCategorys = [];
         this.listFiler.filterName.listPrices = [];
     }
 
     @Mutation
+    updateNumFiler() {
+        if (
+            this.listFiler.filterName.listCategorys &&
+            this.listFiler.filterName.listPrices
+        ) {
+            this.listFiler.filterName.num =
+                this.listFiler.filterName.listCategorys.length +
+                this.listFiler.filterName.listPrices.length;
+        }
+    }
+
+    @Mutation
     addCategory(id: string): void {
-        for (const l of this.listFiler.category.listCategorys) {
-            if (l.id === id) {
-                l.selected = true;
+        if (this.listFiler.category.listCategorys) {
+            for (const l of this.listFiler.category.listCategorys) {
+                if (l.id === id) {
+                    l.selected = !l.selected;
+                }
             }
         }
     }
 
     @Mutation
     addPrice(id: string): void {
-        for (const l of this.listFiler.price.listPrices) {
-            if (l.id === id) {
-                l.selected = true;
+        if (this.listFiler.price.listPrices) {
+            for (const l of this.listFiler.price.listPrices) {
+                if (l.id === id) {
+                    l.selected = true;
+                }
             }
         }
-        console.log(id);
+    }
+
+    @Mutation
+    updateproductFilter() {
+        console.log('test');
+        if (
+            !this.listFiler.filterName.listCategorys?.length &&
+            !this.listFiler.filterName.listPrices?.length
+        ) {
+            this.productFilter = product.products;
+        } else {
+            debugger;
+            let listProduct = product.products;
+            if (
+                this.listFiler.filterName.listCategorys &&
+                this.listFiler.filterName.listCategorys?.length
+            ) {
+                const tempProducts = listProduct.filter(
+                    (item) =>
+                        this.listFiler.filterName.listCategorys?.find(
+                            (lP) => lP.name === item.category,
+                        ) !== undefined,
+                );
+                listProduct = tempProducts;
+            }
+            if (
+                this.listFiler.filterName.listPrices &&
+                this.listFiler.filterName.listPrices?.length
+            ) {
+                const tempProducts = listProduct.filter(
+                    (item) =>
+                        this.listFiler.filterName.listPrices?.find(
+                            (lP) =>
+                                lP.min <= item.realPrice &&
+                                (lP.max >= item.realPrice || lP.max),
+                        ) !== undefined,
+                );
+                listProduct = tempProducts;
+            }
+            this.productFilter = listProduct;
+        }
     }
 
     @Mutation
     updateFilter(): void {
-        const f = this.listFiler.category.listCategorys.filter(
-            (item) => item.selected === true,
-        );
-        this.listFiler.filterName.listCategorys = f as any;
-        const g = this.listFiler.price.listPrices.filter(
-            (item) => item.selected === true,
-        );
-        this.listFiler.filterName.listPrices = g as any;
-    }
-
-    @Mutation
-    updateNumFiler() {
-        this.listFiler.filterName.num =
-            this.listFiler.filterName.listCategorys.length +
-            this.listFiler.filterName.listPrices.length;
-        console.log('test');
+        if (this.listFiler.category.listCategorys) {
+            const f = this.listFiler.category.listCategorys.filter(
+                (item) => item.selected === true,
+            );
+            this.listFiler.filterName.listCategorys = f;
+        }
+        if (this.listFiler.price.listPrices) {
+            const g = this.listFiler.price.listPrices.filter(
+                (item) => item.selected === true,
+            );
+            this.listFiler.filterName.listPrices = g;
+        }
     }
 }
 
