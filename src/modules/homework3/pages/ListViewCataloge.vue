@@ -115,6 +115,7 @@ export default {
             filters.updateFilter();
             filters.updateproductFilter();
             filters.updateNumFiler();
+            filters.updateNumberCatagorySelected();
         },
         clearAll(): void {
             filters.clearAllCategory();
