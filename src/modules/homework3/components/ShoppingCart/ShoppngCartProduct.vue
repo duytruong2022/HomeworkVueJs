@@ -40,6 +40,7 @@
                     <img
                         class="product-shopping-icon"
                         src="../../../../assets/images/homework3/icon/shoppingcart-delete-icon.svg"
+                        @click="clearCartItem(product.id)"
                     />
                     <img
                         class="product-shopping-icon"
@@ -51,17 +52,17 @@
     </div>
 </template>
 <script lang="ts">
-import { product } from '../../store';
+import { carts } from '../../store';
 export default {
     props: {
         product: Object,
     },
     methods: {
         numProductUp(id: string): void {
-            product.upQuantityCart(id);
+            carts.upQuantityCart(id);
         },
         numProductDown(id: string): void {
-            product.downQuantityCart(id);
+            carts.downQuantityCart(id);
         },
     },
 };

@@ -61,12 +61,12 @@
     </div>
 </template>
 <script lang="ts">
-import { product } from '../store';
+import { carts } from '../store';
 import { ICartItem } from '../type';
 import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';
 import ProductShoppingCart from '../components/ShoppingCart/ShoppngCartProduct.vue';
-import SummrayShoppingCart from '../components/ShoppingCart/SummayShoppingCart.vue';
+import SummrayShoppingCart from '../components/ShoppingCart/ShoppingCartSummay.vue';
 export default {
     components: {
         Topbar,
@@ -76,15 +76,15 @@ export default {
     },
     methods: {
         clearCart(): void {
-            product.clearCart();
+            carts.clearCart();
         },
         updateCart(): void {
-            product.updateCart();
+            carts.updateCart();
         },
     },
     computed: {
         products(): Array<ICartItem> {
-            return product.getAlllistCarts;
+            return carts.getAlllistCarts;
         },
     },
 };

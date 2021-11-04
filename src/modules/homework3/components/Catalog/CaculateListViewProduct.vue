@@ -76,7 +76,7 @@
     </div>
 </template>
 <script lang="ts">
-import { product } from '../../store';
+import { carts } from '../../store';
 export default {
     name: 'Product',
     props: {
@@ -85,7 +85,7 @@ export default {
     methods: {
         addToCart(id: string): void {
             const el = { id: id };
-            product.addToCart(el);
+            carts.addToCart(el);
             alert('success');
         },
     },

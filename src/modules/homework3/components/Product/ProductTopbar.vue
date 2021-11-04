@@ -41,7 +41,7 @@
     </div>
 </template>
 <script>
-import { product } from '../../store';
+import { carts } from '../../store';
 export default {
     props: {
         product: Object,
@@ -78,7 +78,7 @@ export default {
         },
         addToCart(id, num) {
             const el = { id: id, num: num };
-            product.addToCart(el);
+            carts.addToCart(el);
             alert('success');
         },
     },

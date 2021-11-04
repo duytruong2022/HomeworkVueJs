@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import Filter from './CatalogeListViewFilter.vue';
-import { product } from '../../store';
+import { filters } from '../../store';
 
 export default {
     components: {
@@ -32,10 +32,10 @@ export default {
     },
     methods: {
         clearFilter() {
-            product.clearAllCategory();
+            filters.clearAllCategory();
         },
         updateFilter() {
-            product.updateFilter();
+            filters.updateFilter();
         }
     },
 };

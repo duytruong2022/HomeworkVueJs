@@ -99,7 +99,7 @@ import Topbar from '../components/Topbar.vue';
 import Contact from '../components/Contact.vue';
 import ListFiler from '../components/Catalog/CatalogeListViewListFilter.vue';
 import CaculeteProdu from '../components/Catalog/CaculateListViewProduct.vue';
-import { product } from '../store';
+import { product, filters } from '../store';
 export default {
     components: {
         Topbar,
@@ -109,17 +109,16 @@ export default {
     },
     methods: {
         clearCategory(id) {
-            product.clearCategory(id);
+            filters.clearCategory(id);
         },
         clearAll() {
-            product.clearAllCategory();
+            filters.clearAllCategory();
         },
     },
     watch: {
         listFiler: {
             handler: function () {
-                product.updateNumFiler();
-                console.log('test');
+                filters.updateNumFiler();
             },
             deep: true,
         },
@@ -129,7 +128,7 @@ export default {
             return product.getAllProduct;
         },
         listFilters() {
-            return { ...product.getAllFilter };
+            return { ...filters.getAllFilter };
         },
     },
 };

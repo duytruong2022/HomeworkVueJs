@@ -35,7 +35,7 @@
 <script>
 import ShoppingCartShippingTax from './ShoppingCartShippingTax.vue';
 import ShoppingCartDistcount from './ShoppingCartDistcount.vue';
-import { product } from '../../store';
+import { carts } from '../../store';
 export default {
     components: {
         ShoppingCartShippingTax,
@@ -56,7 +56,7 @@ export default {
     },
     computed: {
         subtotal() {
-            return product.getSumSubtotal;
+            return carts.getSumSubtotal;
         },
     },
     watch: {

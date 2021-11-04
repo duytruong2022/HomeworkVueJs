@@ -2,9 +2,8 @@ import { getModule, VuexModule, Mutation, Module } from 'vuex-module-decorators'
 import store from '@/store';
 import { ICartItem, IProduct } from './type';
 
-@Module({ dynamic: true, namespaced: true, store, name: 'Cart' })
+@Module({ dynamic: true, namespaced: true, store, name: 'product' })
 class Product extends VuexModule {
-    sumSubtotal = 0;
     products: Array<IProduct> = [
         {
             id: '1',
@@ -104,6 +103,16 @@ class Product extends VuexModule {
         },
     ];
 
+    get getAllProduct() {
+        return this.products;
+    }
+}
+
+export const product = getModule(Product);
+
+@Module({ dynamic: true, namespaced: true, store, name: 'cart' })
+class Carts extends VuexModule {
+    sumSubtotal = 0;
     listCarts: Array<ICartItem> = [
         {
             id: '1',
@@ -116,6 +125,74 @@ class Product extends VuexModule {
         },
     ];
 
+    get getAlllistCarts() {
+        return this.listCarts;
+    }
+
+    get getSumSubtotal() {
+        return this.sumSubtotal;
+    }
+
+    @Mutation
+    updateCart(): void {
+        this.sumSubtotal = 0;
+        for (const item of this.listCarts) {
+            this.sumSubtotal += item.subtotal;
+        }
+    }
+
+    @Mutation
+    clearCart(): void {
+        this.listCarts = [];
+    }
+
+    @Mutation
+    addToCart(productAdd: { id: string; num?: number }): void {
+        const cartItem = this.listCarts.find((item) => item.id === productAdd.id);
+        console.log(productAdd.num);
+        if (cartItem) {
+            cartItem.quantity += productAdd.num ?? 1;
+            cartItem.subtotal += (productAdd.num ?? 1) * cartItem.price;
+        } else {
+            const prod = product.products.find((item) => item.id === productAdd.id);
+            const p = prod?.realPrice ?? 0;
+            const item: ICartItem = {
+                id: prod?.id ?? '',
+                quantity: productAdd.num ?? 1,
+                price: p,
+                image: prod?.img[1],
+                description: prod?.description,
+                subtotal: (productAdd.num ?? 1) * p,
+            };
+            this.listCarts.push(item);
+        }
+    }
+
+    @Mutation
+    upQuantityCart(id: string): void {
+        const cartItem = this.listCarts.find((item) => item.id === id);
+        if (cartItem) {
+            cartItem.quantity += 1;
+            cartItem.subtotal += cartItem.price;
+        }
+    }
+
+    @Mutation
+    downQuantityCart(id: string): void {
+        const cartItem = this.listCarts.find((item) => item.id === id);
+        if (cartItem) {
+            if (cartItem.quantity >= 1) {
+                cartItem.quantity -= 1;
+                cartItem.subtotal -= cartItem.price;
+            }
+        }
+    }
+}
+
+export const carts = getModule(Carts);
+
+@Module({ dynamic: true, namespaced: true, store, name: 'filter' })
+class Filters extends VuexModule {
     listFiler = {
         category: {
             title: 'Category',
@@ -212,75 +289,8 @@ class Product extends VuexModule {
         },
     };
 
-    get getAllProduct() {
-        return this.products;
-    }
-
     get getAllFilter() {
         return this.listFiler;
-    }
-
-    get getAlllistCarts() {
-        return this.listCarts;
-    }
-
-    get getSumSubtotal() {
-        return this.sumSubtotal;
-    }
-
-    @Mutation
-    updateCart(): void {
-        this.sumSubtotal = 0;
-        for (const item of this.listCarts) {
-            this.sumSubtotal += item.subtotal;
-        }
-    }
-
-    @Mutation
-    clearCart(): void {
-        this.listCarts = [];
-    }
-
-    @Mutation
-    addToCart(productAdd: { id: string; num?: number }): void {
-        const cartItem = this.listCarts.find((item) => item.id === productAdd.id);
-        console.log(productAdd.num);
-        if (cartItem) {
-            cartItem.quantity += productAdd.num ?? 1;
-            cartItem.subtotal += (productAdd.num ?? 1) * cartItem.price;
-        } else {
-            const prod = this.products.find((item) => item.id === productAdd.id);
-            const p = prod?.realPrice ?? 0;
-            const item: ICartItem = {
-                id: prod?.id ?? '',
-                quantity: productAdd.num ?? 1,
-                price: p,
-                image: prod?.img[1],
-                description: prod?.description,
-                subtotal: (productAdd.num ?? 1) * p,
-            };
-            this.listCarts.push(item);
-        }
-    }
-
-    @Mutation
-    upQuantityCart(id: string): void {
-        const cartItem = this.listCarts.find((item) => item.id === id);
-        if (cartItem) {
-            cartItem.quantity += 1;
-            cartItem.subtotal += cartItem.price;
-        }
-    }
-
-    @Mutation
-    downQuantityCart(id: string): void {
-        const cartItem = this.listCarts.find((item) => item.id === id);
-        if (cartItem) {
-            if (cartItem.quantity >= 1) {
-                cartItem.quantity -= 1;
-                cartItem.subtotal -= cartItem.price;
-            }
-        }
     }
 
     @Mutation
@@ -344,4 +354,4 @@ class Product extends VuexModule {
     }
 }
 
-export const product = getModule(Product);
+export const filters = getModule(Filters);

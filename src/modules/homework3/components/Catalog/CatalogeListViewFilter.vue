@@ -52,7 +52,7 @@
 
 <script>
 import { object } from 'yup/lib/locale';
-import { product } from '../../store';
+import { filters } from '../../store';
 export default {
     props: {
         filter: object,
@@ -73,10 +73,10 @@ export default {
             this.selectedColor = color;
         },
         addCategory(id) {
-            product.addCategory(id);
+            filters.addCategory(id);
         },
         addPrice(id) {
-            product.addPrice(id);
+            filters.addPrice(id);
         },
     },
 };
