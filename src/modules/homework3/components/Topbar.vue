@@ -1,48 +1,67 @@
 <template>
-    <div class="topbars">
-        <!-- Navbar -->
-        <nav>
-            <div class="navbar-custom">
-                <div class="topbars-logo">
-                    <router-link :to="{ name: 'homework3', param: {} }"
-                        ><img src="../../../assets/images/homework3/logo.svg" alt=""
-                    /></router-link>
-                </div>
-                <div
-                    class="topbars-list-category"
-                    v-for="category in categorys"
-                    :key="category.name"
-                >
-                    <a :href="category.link">{{ category.name }}</a>
-                </div>
-                <div class="topbars-deals">
-                    <button class="topbars-deals-button">Our Deals</button>
-                </div>
-                <div class="topbars-op-icon">
-                    <div class="topbars-gg-search">
-                        <img src="../../../assets/images/homework3/icon/gg_search.svg" />
-                    </div>
-                    <router-link
-                        class="topbars-shoppng-cart"
-                        :to="{ name: 'cart', param: {} }"
-                    >
-                        <img
-                            src="../../../assets/images/homework3/icon/shopping-cart.svg"
-                        />
-                    </router-link>
-                </div>
-                <div class="topbars-customer-img">
-                    <img src="../../../assets/images/homework3/customer.png" />
-                </div>
+    <!-- Navbar -->
+    <nav class="topbars">
+        <div class="navbar-custom">
+            <div class="topbars-logo">
+                <router-link :to="{ name: 'homework3', param: {} }"
+                    ><img src="../../../assets/images/homework3/logo.svg" alt=""
+                /></router-link>
             </div>
-        </nav>
-        <!-- end navbar-->
-    </div>
+            <div
+                class="topbars-list-category"
+                v-for="category in categorys"
+                :key="category.name"
+            >
+                <a :href="category.link">{{ category.name }}</a>
+            </div>
+            <div class="topbars-deals">
+                <button class="topbars-deals-button">Our Deals</button>
+            </div>
+            <div class="topbars-op-icon">
+                <div class="topbars-gg-search" @click="showSearch()">
+                    <img src="../../../assets/images/homework3/icon/gg_search.svg" />
+                </div>
+                <router-link
+                    class="topbars-shoppng-cart"
+                    :to="{ name: 'cart', param: {} }"
+                >
+                    <el-badge :value="numberProductinCart" class="item">
+                        <img
+                            src="../../../assets/images/homework3/icon/shopping_cart.svg"
+                        />
+                    </el-badge>
+                </router-link>
+            </div>
+            <div class="topbars-customer-img">
+                <img src="../../../assets/images/homework3/customer.png" />
+            </div>
+        </div>
+        <div class="search" v-show="viewSearch">
+            <el-input v-model="searchText" placeholder="what are you looking for" />
+            <el-button
+                type="primary"
+                icon="el-icon-search"
+                class="search-button"
+                @click="search(searchText)"
+            >
+                Search
+            </el-button>
+        </div>
+    </nav>
+    <!-- end navbar-->
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component';
+import { Options, Vue } from 'vue-class-component';
+import { carts, filters } from '../store';
 
+@Options({
+    computed: {
+        numberProductinCart() {
+            return carts.getNumberProductinCart;
+        },
+    },
+})
 export default class TopBar extends Vue {
     categorys = [
         {
@@ -74,15 +93,29 @@ export default class TopBar extends Vue {
             link: '#',
         },
     ];
+
+    viewSearch = false;
+    searchText = '';
+
+    showSearch(): void {
+        this.viewSearch = !this.viewSearch;
+    }
+
+    search(): void {
+        this.$router.push({ path: '/homework3', query: { s: this.searchText } });
+        filters.updateSearch(this.searchText);
+        filters.updateproductFilter();
+    }
 }
 </script>
 
 <style lang="scss" scoped>
-.topbar {
-    height: 92px;
+.topbars {
+    border: 1px solid #e3ebf6;
 }
 .navbar-custom {
     display: flex;
+    border: none;
 }
 .topbars-logo {
     margin-left: 7.7%;
@@ -132,7 +165,7 @@ export default class TopBar extends Vue {
         margin-bottom: 34px;
     }
     .topbars-shoppng-cart {
-        margin-top: 32px;
+        margin-top: 36px;
         margin-bottom: 28px;
         padding-left: 39%;
     }
@@ -142,5 +175,15 @@ export default class TopBar extends Vue {
     margin-bottom: 28px;
     margin-left: 3.8%;
     margin-right: 7.7%;
+}
+.search {
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 5px;
+    border-radius: 25px;
+    display: flex;
+    .search-button {
+        margin-left: 15px;
+    }
 }
 </style>

@@ -2,19 +2,19 @@ import { getModule, VuexModule, Mutation, Module } from 'vuex-module-decorators'
 import store from '@/store';
 import { ICartItem, IProduct, IListFilter, ICustomerInfo } from './type';
 
-@Module({ dynamic: true, namespaced: true, store, name: 'product' })
+@Module({ dynamic: true, namespaced: true, store, name: 'products' })
 class Product extends VuexModule {
     products: Array<IProduct> = [
         {
             id: '1',
             img: ['product/1_1.png', 'product/4_1.png', 'product/3_1.png'],
-            code: 'SKU D5515AI',
+            code: 'SKU D5515AI3',
             name: 'MSI MPG Trident 1 ',
             category: 'HP/COMPAQ PCS',
             description:
                 'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
-            realPrice: 3300,
-            salePrice: 3299,
+            realPrice: 3000,
+            salePrice: 2999,
             CPU: 'N/A',
             Featured: 'N/A',
             IOPorts: 'N/A',
@@ -41,13 +41,13 @@ class Product extends VuexModule {
         {
             id: '2',
             img: ['product/2_1.png', 'product/3_1.png', 'product/2_1.png'],
-            code: 'SKU D5515AI',
+            code: 'SKU D5515AI2',
             name: 'MSI MPG Trident 2 ',
             category: 'MSI ALL-IN-ONE PCS',
             description:
                 'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
-            realPrice: 3300,
-            salePrice: 3299,
+            realPrice: 3100,
+            salePrice: 3099,
             CPU: 'N/A',
             Featured: 'N/A',
             IOPorts: 'N/A',
@@ -74,13 +74,13 @@ class Product extends VuexModule {
         {
             id: '3',
             img: ['product/3_1.png', 'product/1_1.png', 'product/2_1.png'],
-            code: 'SKU D5515AI',
+            code: 'SKU D5515AI6',
             category: 'CUSTOM PCS',
             name: 'MSI MPG Trident 3 ',
             description:
                 'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
-            realPrice: 3300,
-            salePrice: 3299,
+            realPrice: 3500,
+            salePrice: 3499,
             CPU: 'N/A',
             Featured: 'N/A',
             IOPorts: 'N/A',
@@ -107,13 +107,13 @@ class Product extends VuexModule {
         {
             id: '4',
             img: ['product/4_1.png', 'product/1_1.png', 'product/2_1.png'],
-            code: 'SKU D5515AI',
+            code: 'SKU D5515AI0',
             category: 'CUSTOM PCS',
-            name: 'MSI MPG Trident 3 ',
+            name: 'MSI MPG Trident 0 ',
             description:
                 'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
-            realPrice: 3300,
-            salePrice: 3299,
+            realPrice: 2900,
+            salePrice: 2899,
             CPU: 'N/A',
             Featured: 'N/A',
             IOPorts: 'N/A',
@@ -146,9 +146,10 @@ class Product extends VuexModule {
 
 export const product = getModule(Product);
 
-@Module({ dynamic: true, namespaced: true, store, name: 'cart' })
+@Module({ dynamic: true, namespaced: true, store, name: 'carts' })
 class Carts extends VuexModule {
     sumSubtotal = 0;
+    numberProductinCart = 1;
     listCarts: Array<ICartItem> = [
         {
             id: '1',
@@ -176,6 +177,10 @@ class Carts extends VuexModule {
         return this.sumSubtotal;
     }
 
+    get getNumberProductinCart() {
+        return this.numberProductinCart;
+    }
+
     @Mutation
     updateCart(): void {
         this.sumSubtotal = 0;
@@ -187,6 +192,7 @@ class Carts extends VuexModule {
     @Mutation
     clearCart(): void {
         this.listCarts = [];
+        this.numberProductinCart = 0;
     }
 
     @Mutation
@@ -208,6 +214,7 @@ class Carts extends VuexModule {
             };
             this.listCarts.push(item);
         }
+        this.numberProductinCart = this.listCarts.length;
     }
 
     @Mutation
@@ -234,6 +241,7 @@ class Carts extends VuexModule {
     clearCartItem(id: string): void {
         const listItem = this.listCarts.filter((item) => item.id !== id);
         this.listCarts = listItem;
+        this.numberProductinCart = this.listCarts.length;
     }
 
     @Mutation
@@ -245,7 +253,7 @@ class Carts extends VuexModule {
 
 export const carts = getModule(Carts);
 
-@Module({ dynamic: true, namespaced: true, store, name: 'filter' })
+@Module({ dynamic: true, namespaced: true, store, name: 'filters' })
 class Filters extends VuexModule {
     listFiler: IListFilter = {
         category: {
@@ -345,8 +353,8 @@ class Filters extends VuexModule {
     };
 
     productFilter: Array<IProduct> = product.products;
-
     numberCatagorySelected = 0;
+    search = '';
 
     get getAllFilter() {
         return this.listFiler;
@@ -361,7 +369,12 @@ class Filters extends VuexModule {
     }
 
     @Mutation
-    updateNumberCatagorySelected() {
+    updateSearch(search: string): void {
+        this.search = search;
+    }
+
+    @Mutation
+    updateNumberCatagorySelected(): void {
         this.numberCatagorySelected =
             this.listFiler.filterName.listCategorys?.length ?? 0;
     }
@@ -430,7 +443,6 @@ class Filters extends VuexModule {
 
     @Mutation
     updateproductFilter() {
-        console.log('test');
         if (
             !this.listFiler.filterName.listCategorys?.length &&
             !this.listFiler.filterName.listPrices?.length
@@ -466,6 +478,13 @@ class Filters extends VuexModule {
             }
             this.productFilter = listProduct;
         }
+        if (this.search !== '') {
+            this.productFilter = this.productFilter.filter(
+                (item) =>
+                    item.code.search(this.search) !== -1 ||
+                    item.name.search(this.search) !== -1,
+            );
+        }
     }
 
     @Mutation
@@ -481,6 +500,34 @@ class Filters extends VuexModule {
                 (item) => item.selected === true,
             );
             this.listFiler.filterName.listPrices = g;
+        }
+    }
+
+    @Mutation
+    SortProductFilter(cases: string): void {
+        switch (cases) {
+            case 'name':
+                this.productFilter = this.productFilter.sort((a, b) => {
+                    const typeA = a.name.toUpperCase();
+                    const typeB = b.name.toUpperCase();
+                    if (typeA === typeB) return 0;
+                    else if (typeA > typeB) return 1;
+                    else return -1;
+                });
+                break;
+            case 'code':
+                this.productFilter = this.productFilter.sort((a, b) => {
+                    const typeA = a.code.toUpperCase();
+                    const typeB = b.code.toUpperCase();
+                    if (typeA === typeB) return 0;
+                    else if (typeA > typeB) return 1;
+                    else return -1;
+                });
+                break;
+            case 'price':
+                this.productFilter = this.productFilter.sort((a, b) => {
+                    return a.salePrice - b.salePrice;
+                });
         }
     }
 }

@@ -33,9 +33,29 @@
                                 <label class="list-view-catalog-product-laber"
                                     >Sort By:
                                 </label>
-                                <select class="list-view-catalog-product-select">
-                                    <option value="" selected>Option 1</option>
-                                    <option value="">Option 2</option>
+                                <select
+                                    class="list-view-catalog-product-select"
+                                    v-model="sort"
+                                    placeholder="Sort"
+                                >
+                                    <option
+                                        class="list-view-catalog-product-op-box"
+                                        value="name"
+                                    >
+                                        Name
+                                    </option>
+                                    <option
+                                        class="list-view-catalog-product-op-box"
+                                        value="code"
+                                    >
+                                        Code
+                                    </option>
+                                    <option
+                                        class="list-view-catalog-product-op-box"
+                                        value="price"
+                                    >
+                                        Price
+                                    </option>
                                 </select>
                             </div>
                             <div class="list-view-catalog-product-op-box">
@@ -104,6 +124,9 @@ import CaculeteProdu from '../components/Catalog/CaculateListViewProduct.vue';
 import { filters } from '../store';
 import { IListFilter, IProduct } from '../type';
 @Options({
+    props: {
+        search: String,
+    },
     components: {
         Topbar,
         Contact,
@@ -121,8 +144,19 @@ import { IListFilter, IProduct } from '../type';
             return filters.getNumberCatagorySelected;
         },
     },
+    watch: {
+        sort() {
+            filters.SortProductFilter(this.sort);
+        },
+    },
+    created() {
+        filters.updateSearch(this.search);
+        filters.updateproductFilter();
+    },
 })
 export default class ListViewCaculate extends Vue {
+    sort = '';
+    search!: string;
     clearCategory(id: string): void {
         filters.clearCategory(id);
         filters.updateFilter();

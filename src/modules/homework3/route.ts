@@ -14,6 +14,7 @@ export default [
         meta: {
             public: true,
         },
+        props: (route) => ({ search: route.query.s }),
     },
     {
         path: '/product/:id',
