@@ -38,6 +38,8 @@ export default class CatalogeListViewListFilter extends Vue {
     clearFilter(): void {
         filters.clearAllCategory();
         filters.updateproductFilter();
+        filters.updateListShowProducts();
+
         filters.updateNumFiler();
         filters.updateNumberCatagorySelected();
     }
@@ -45,6 +47,8 @@ export default class CatalogeListViewListFilter extends Vue {
     updateFilter(): void {
         filters.updateFilter();
         filters.updateproductFilter();
+        filters.updateListShowProducts();
+
         filters.updateNumFiler();
         filters.updateNumberCatagorySelected();
     }

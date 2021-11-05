@@ -26,7 +26,9 @@
                 <el-col :md="19" :lg="19" :xl="19">
                     <div class="list-view-catalog-product-header">
                         <div class="list-view-catalog-productnum-product">
-                            Items 1 - 35 of 61
+                            Items {{ (numberPageSelect - 1) * numItemperPage + 1 }} -
+                            {{ numberPageSelect * numItemperPage }} of
+                            {{ numProductFilter }}
                         </div>
                         <div class="list-view-catalog-product-show-op">
                             <div class="list-view-catalog-product-op-box">
@@ -41,6 +43,7 @@
                                     <option
                                         class="list-view-catalog-product-op-box"
                                         value="name"
+                                        selected
                                     >
                                         Name
                                     </option>
@@ -62,9 +65,12 @@
                                 <label class="list-view-catalog-product-laber"
                                     >Show
                                 </label>
-                                <select class="list-view-catalog-product-select">
-                                    <option value="" selected>35 per page</option>
-                                    <option value="">40 per page</option>
+                                <select
+                                    class="list-view-catalog-product-select"
+                                    v-model="numItemperPage"
+                                >
+                                    <option value="3" selected>3 per page</option>
+                                    <option value="5">5 per page</option>
                                 </select>
                             </div>
                             <div class="list-view-catalog-product-pr-icon">
@@ -102,12 +108,23 @@
                             Clear All
                         </div>
                     </div>
-                    <div class="list-view-catalog-product-product-list">
+                    <div
+                        class="list-view-catalog-product-product-list"
+                        id="caculete-produ"
+                    >
                         <CaculeteProdu
                             v-for="(product, index) in products"
                             :key="index"
                             :product="product"
                         />
+                        <el-pagination
+                            :page-size="numItemperPage"
+                            :pager-count="7"
+                            layout="prev, pager, next"
+                            :total="numProductFilter"
+                            @current-change="selectPage"
+                        >
+                        </el-pagination>
                     </div>
                 </el-col>
             </el-row>
@@ -135,7 +152,7 @@ import { IListFilter, IProduct } from '../type';
     },
     computed: {
         products(): Array<IProduct> {
-            return filters.getProductFilter;
+            return filters.getListShowProducts;
         },
         listFilters(): IListFilter {
             return { ...filters.getAllFilter };
@@ -143,24 +160,39 @@ import { IListFilter, IProduct } from '../type';
         numCategory(): number {
             return filters.getNumberCatagorySelected;
         },
+        numProductFilter(): number {
+            return filters.getNumberofProductFilter;
+        },
+        numberPageSelect(): number {
+            return filters.getNumberPageSelect;
+        },
     },
     watch: {
         sort() {
             filters.SortProductFilter(this.sort);
+            filters.updateListShowProducts();
+        },
+        numItemperPage() {
+            if (this.numItemperPage === '3') filters.updateNumberItemperPage(3);
+            else filters.updateNumberItemperPage(5);
+            filters.updateListShowProducts();
         },
     },
     created() {
         filters.updateSearch(this.search);
         filters.updateproductFilter();
+        filters.updateListShowProducts();
     },
 })
 export default class ListViewCaculate extends Vue {
     sort = '';
+    numItemperPage = '3';
     search!: string;
     clearCategory(id: string): void {
         filters.clearCategory(id);
         filters.updateFilter();
         filters.updateproductFilter();
+        filters.updateListShowProducts();
         filters.updateNumFiler();
         filters.updateNumberCatagorySelected();
     }
@@ -168,8 +200,14 @@ export default class ListViewCaculate extends Vue {
     clearAll(): void {
         filters.clearAllCategory();
         filters.updateproductFilter();
+        filters.updateListShowProducts();
         filters.updateNumFiler();
         filters.updateNumberCatagorySelected();
+    }
+
+    selectPage(param: number): void {
+        filters.updatePageSelectd(param);
+        filters.updateListShowProducts();
     }
 }
 </script>
@@ -297,5 +335,6 @@ export default class ListViewCaculate extends Vue {
     margin-top: 13.5px;
     margin-left: 5px;
     margin-right: 5px;
+    text-align: center;
 }
 </style>

@@ -105,6 +105,7 @@ export default class TopBar extends Vue {
         this.$router.push({ path: '/homework3', query: { s: this.searchText } });
         filters.updateSearch(this.searchText);
         filters.updateproductFilter();
+        filters.updateListShowProducts();
     }
 }
 </script>

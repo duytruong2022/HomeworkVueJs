@@ -80,7 +80,7 @@ class Product extends VuexModule {
             description:
                 'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
             realPrice: 3500,
-            salePrice: 3499,
+            salePrice: 1399,
             CPU: 'N/A',
             Featured: 'N/A',
             IOPorts: 'N/A',
@@ -137,9 +137,75 @@ class Product extends VuexModule {
             rating: '4.00',
             reviews: 4,
         },
+        {
+            id: '5',
+            img: ['product/4_1.png', 'product/1_1.png', 'product/2_1.png'],
+            code: 'SKU D5515AI5',
+            category: 'CUSTOM PCS',
+            name: 'MSI MPG Trident 5 ',
+            description:
+                'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
+            realPrice: 2900,
+            salePrice: 2899,
+            CPU: 'N/A',
+            Featured: 'N/A',
+            IOPorts: 'N/A',
+            specifications: [
+                'Intel Core i7-10700F',
+                'Intel H410',
+                'WHITE',
+                'NVIDIA MSI GeForce RTX 2060 SUPER 8GB AERO ITX GDDR6',
+                'SO-DIMM 16GB (16GB x 1) DDR4 2666MHz',
+                '2 total slots (64GB Max)',
+                '512GB (1 x 512GB) M.2 NVMe PCIe GEN3x4 SSD 2TB (2.5) 5400RPM',
+                'Gaming Keyboard GK30 + Gaming Mouse GM11',
+                '3.5 HDD (0/0), 2.5 HDD/SSD(1/0), M.2 (1/0)',
+                'Intel WGI219Vethernet (10/100/1000M)',
+                'AX200 (WIFI 6)+BT5.1',
+                'PSU 330W',
+                'Fan Cooler',
+            ],
+            colors: ['#4B4D4F', '#F2E9DC', '#EAE8EB'],
+            isSock: true,
+            rating: '4.00',
+            reviews: 4,
+        },
+        {
+            id: '6',
+            img: ['product/4_1.png', 'product/1_1.png', 'product/2_1.png'],
+            code: 'SKU D5515AI6',
+            category: 'CUSTOM PCS',
+            name: 'MSI MPG Trident 6 ',
+            description:
+                'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
+            realPrice: 2900,
+            salePrice: 1899,
+            CPU: 'N/A',
+            Featured: 'N/A',
+            IOPorts: 'N/A',
+            specifications: [
+                'Intel Core i7-10700F',
+                'Intel H410',
+                'WHITE',
+                'NVIDIA MSI GeForce RTX 2060 SUPER 8GB AERO ITX GDDR6',
+                'SO-DIMM 16GB (16GB x 1) DDR4 2666MHz',
+                '2 total slots (64GB Max)',
+                '512GB (1 x 512GB) M.2 NVMe PCIe GEN3x4 SSD 2TB (2.5) 5400RPM',
+                'Gaming Keyboard GK30 + Gaming Mouse GM11',
+                '3.5 HDD (0/0), 2.5 HDD/SSD(1/0), M.2 (1/0)',
+                'Intel WGI219Vethernet (10/100/1000M)',
+                'AX200 (WIFI 6)+BT5.1',
+                'PSU 330W',
+                'Fan Cooler',
+            ],
+            colors: ['#4B4D4F', '#F2E9DC', '#EAE8EB'],
+            isSock: true,
+            rating: '4.00',
+            reviews: 4,
+        },
     ];
 
-    get getAllProduct() {
+    get getAllProduct(): Array<IProduct> {
         return this.products;
     }
 }
@@ -169,15 +235,15 @@ class Carts extends VuexModule {
         shipping: true,
     };
 
-    get getAlllistCarts() {
+    get getAlllistCarts(): Array<ICartItem> {
         return this.listCarts;
     }
 
-    get getSumSubtotal() {
+    get getSumSubtotal(): number {
         return this.sumSubtotal;
     }
 
-    get getNumberProductinCart() {
+    get getNumberProductinCart(): number {
         return this.numberProductinCart;
     }
 
@@ -354,18 +420,134 @@ class Filters extends VuexModule {
 
     productFilter: Array<IProduct> = product.products;
     numberCatagorySelected = 0;
+    numberPageSelect = 1;
+    numberItemperPage = 3;
+    listShowProduct: Array<IProduct> = [
+        {
+            id: '1',
+            img: ['product/1_1.png', 'product/4_1.png', 'product/3_1.png'],
+            code: 'SKU D5515AI3',
+            name: 'MSI MPG Trident 1 ',
+            category: 'HP/COMPAQ PCS',
+            description:
+                'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
+            realPrice: 3000,
+            salePrice: 2999,
+            CPU: 'N/A',
+            Featured: 'N/A',
+            IOPorts: 'N/A',
+            specifications: [
+                'Intel Core i7-10700F',
+                'Intel H410',
+                'WHITE',
+                'NVIDIA MSI GeForce RTX 2060 SUPER 8GB AERO ITX GDDR6',
+                'SO-DIMM 16GB (16GB x 1) DDR4 2666MHz',
+                '2 total slots (64GB Max)',
+                '512GB (1 x 512GB) M.2 NVMe PCIe GEN3x4 SSD 2TB (2.5) 5400RPM',
+                'Gaming Keyboard GK30 + Gaming Mouse GM11',
+                '3.5 HDD (0/0), 2.5 HDD/SSD(1/0), M.2 (1/0)',
+                'Intel WGI219Vethernet (10/100/1000M)',
+                'AX200 (WIFI 6)+BT5.1',
+                'PSU 330W',
+                'Fan Cooler',
+            ],
+            colors: ['#4B4D4F', '#F2E9DC', '#EAE8EB'],
+            isSock: true,
+            rating: '4.00',
+            reviews: 4,
+        },
+        {
+            id: '2',
+            img: ['product/2_1.png', 'product/3_1.png', 'product/2_1.png'],
+            code: 'SKU D5515AI2',
+            name: 'MSI MPG Trident 2 ',
+            category: 'MSI ALL-IN-ONE PCS',
+            description:
+                'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
+            realPrice: 3100,
+            salePrice: 3099,
+            CPU: 'N/A',
+            Featured: 'N/A',
+            IOPorts: 'N/A',
+            specifications: [
+                'Intel Core i7-10700F',
+                'Intel H410',
+                'WHITE',
+                'NVIDIA MSI GeForce RTX 2060 SUPER 8GB AERO ITX GDDR6',
+                'SO-DIMM 16GB (16GB x 1) DDR4 2666MHz',
+                '2 total slots (64GB Max)',
+                '512GB (1 x 512GB) M.2 NVMe PCIe GEN3x4 SSD 2TB (2.5) 5400RPM',
+                'Gaming Keyboard GK30 + Gaming Mouse GM11',
+                '3.5 HDD (0/0), 2.5 HDD/SSD(1/0), M.2 (1/0)',
+                'Intel WGI219Vethernet (10/100/1000M)',
+                'AX200 (WIFI 6)+BT5.1',
+                'PSU 330W',
+                'Fan Cooler',
+            ],
+            colors: ['#4B4D4F', '#F2E9DC', '#EAE8EB'],
+            isSock: true,
+            rating: '4.00',
+            reviews: 4,
+        },
+        {
+            id: '3',
+            img: ['product/3_1.png', 'product/1_1.png', 'product/2_1.png'],
+            code: 'SKU D5515AI6',
+            category: 'CUSTOM PCS',
+            name: 'MSI MPG Trident 3 ',
+            description:
+                'MSI MPG Trident 3 10SC-005AU Intel i7 10700F, 2060 SUPER, 16GB RAM, 512GB SSD, 2TB HDD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty Gaming Desktop',
+            realPrice: 3500,
+            salePrice: 1499,
+            CPU: 'N/A',
+            Featured: 'N/A',
+            IOPorts: 'N/A',
+            specifications: [
+                'Intel Core i7-10700F',
+                'Intel H410',
+                'WHITE',
+                'NVIDIA MSI GeForce RTX 2060 SUPER 8GB AERO ITX GDDR6',
+                'SO-DIMM 16GB (16GB x 1) DDR4 2666MHz',
+                '2 total slots (64GB Max)',
+                '512GB (1 x 512GB) M.2 NVMe PCIe GEN3x4 SSD 2TB (2.5) 5400RPM',
+                'Gaming Keyboard GK30 + Gaming Mouse GM11',
+                '3.5 HDD (0/0), 2.5 HDD/SSD(1/0), M.2 (1/0)',
+                'Intel WGI219Vethernet (10/100/1000M)',
+                'AX200 (WIFI 6)+BT5.1',
+                'PSU 330W',
+                'Fan Cooler',
+            ],
+            colors: ['#4B4D4F', '#F2E9DC', '#EAE8EB'],
+            isSock: true,
+            rating: '4.00',
+            reviews: 4,
+        },
+    ];
+
     search = '';
 
-    get getAllFilter() {
+    get getAllFilter(): IListFilter {
         return this.listFiler;
     }
 
-    get getProductFilter() {
+    get getProductFilter(): Array<IProduct> {
         return this.productFilter;
     }
 
-    get getNumberCatagorySelected() {
+    get getNumberCatagorySelected(): number {
         return this.numberCatagorySelected;
+    }
+
+    get getListShowProducts(): Array<IProduct> {
+        return this.listShowProduct;
+    }
+
+    get getNumberofProductFilter(): number {
+        return this.productFilter.length;
+    }
+
+    get getNumberPageSelect(): number {
+        return this.numberPageSelect;
     }
 
     @Mutation
@@ -407,7 +589,7 @@ class Filters extends VuexModule {
     }
 
     @Mutation
-    updateNumFiler() {
+    updateNumFiler(): void {
         if (
             this.listFiler.filterName.listCategorys &&
             this.listFiler.filterName.listPrices
@@ -427,7 +609,6 @@ class Filters extends VuexModule {
                 }
             }
         }
-        console.log(id);
     }
 
     @Mutation
@@ -442,7 +623,7 @@ class Filters extends VuexModule {
     }
 
     @Mutation
-    updateproductFilter() {
+    updateproductFilter(): void {
         if (
             !this.listFiler.filterName.listCategorys?.length &&
             !this.listFiler.filterName.listPrices?.length
@@ -479,10 +660,9 @@ class Filters extends VuexModule {
             this.productFilter = listProduct;
         }
         if (this.search !== '') {
+            const regx = RegExp(this.search, 'i');
             this.productFilter = this.productFilter.filter(
-                (item) =>
-                    item.code.search(this.search) !== -1 ||
-                    item.name.search(this.search) !== -1,
+                (item) => item.code.search(regx) !== -1 || item.name.search(regx) !== -1,
             );
         }
     }
@@ -529,6 +709,28 @@ class Filters extends VuexModule {
                     return a.salePrice - b.salePrice;
                 });
         }
+    }
+
+    @Mutation
+    updatePageSelectd(numberPage: number): void {
+        this.numberPageSelect = numberPage;
+    }
+
+    @Mutation
+    updateListShowProducts(): void {
+        const tempProducts: Array<IProduct> = [];
+        const firstItem = (this.numberPageSelect - 1) * this.numberItemperPage;
+        for (let index = 0; index < this.numberItemperPage; index++) {
+            if (this.productFilter[firstItem + index]) {
+                tempProducts.push(this.productFilter[firstItem + index]);
+            }
+        }
+        this.listShowProduct = tempProducts;
+    }
+
+    @Mutation
+    updateNumberItemperPage(number: number): void {
+        this.numberItemperPage = number;
     }
 }
 
