@@ -1,5 +1,5 @@
 <template>
-    <div class="product">
+    <div class="product" v-for="(product, index) in products" :key="index">
         <el-row gutter="16">
             <el-col :xs="7" :sm="7" :md="7" :lg="7" :xl="7">
                 <router-link
@@ -109,7 +109,7 @@ import { Options, Vue } from 'vue-class-component';
 
 @Options({
     props: {
-        product: Object,
+        products: Object,
     },
 })
 export default class CaculateListViewProduct extends Vue {
@@ -134,8 +134,8 @@ export default class CaculateListViewProduct extends Vue {
     margin-right: 9%;
     margin-bottom: 21px;
     .image {
-        width: 100%;
-        height: 100%;
+        width: 95%;
+        height: auto;
     }
 }
 .reviews {

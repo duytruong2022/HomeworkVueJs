@@ -39,7 +39,7 @@
                 <div class="shoppong-cart-button">
                     <div>
                         <router-link
-                            :to="{ name: 'homework3', param: {} }"
+                            :to="{ name: 'list', param: {} }"
                             class="buttons shopping-button"
                             tag="button"
                         >

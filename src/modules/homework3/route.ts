@@ -2,6 +2,8 @@ import { RouteRecordRaw } from 'vue-router';
 import homework3 from './pages/ListViewCataloge.vue';
 import Product from './pages/Product.vue';
 import Cart from './pages/ShoppingCart.vue';
+import CaculateProductList from './components/Catalog/CaculateListViewProductList.vue';
+import CaculateProductGrid from './components/Catalog/CaculateListViewProductGrid.vue';
 import AboutProduct from './components/Product/ProductAbout.vue';
 import ProductDetails from './components/Product/ProductDetails.vue';
 import ProductSpecs from './components/Product/ProductSpecs.vue';
@@ -15,6 +17,24 @@ export default [
             public: true,
         },
         props: (route) => ({ search: route.query.s }),
+        children: [
+            {
+                path: '',
+                name: 'list',
+                component: CaculateProductList,
+                meta: {
+                    public: true,
+                },
+            },
+            {
+                path: '/grid',
+                name: 'grid',
+                component: CaculateProductGrid,
+                meta: {
+                    public: true,
+                },
+            },
+        ],
     },
     {
         path: '/product/:id',

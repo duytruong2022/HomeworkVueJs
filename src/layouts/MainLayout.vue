@@ -20,7 +20,7 @@
                                 >
                             </li>
                             <li>
-                                <router-link :to="{ name: 'homework3', params: {} }"
+                                <router-link :to="{ name: 'list', params: {} }"
                                     >Bai 1.3</router-link
                                 >
                             </li>
