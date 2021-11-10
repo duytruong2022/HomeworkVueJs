@@ -11,7 +11,7 @@
         >
             <div class="product">
                 <div class="product-stock">
-                    <div v-if="!isSock" class="in-stock">
+                    <div v-if="!product.isSock" class="in-stock">
                         <img
                             class="image"
                             src="../../../../assets/images/homework3/icon/success_icon.svg"
@@ -110,11 +110,21 @@ export default class CaculateListViewProduct extends Vue {
 .product {
     font-family: Poppins;
     font-style: normal;
-    .product-stock {
+    .in-stock {
         font-size: 10px;
         line-height: 210%;
         align-items: center;
         color: #78a962;
+    }
+    .out-stock {
+        font-size: 10px;
+        line-height: 210%;
+        align-items: center;
+        color: red;
+        .image {
+            height: 10px;
+            width: 10px;
+        }
     }
     .product-img {
         margin-top: 7px;

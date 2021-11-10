@@ -56,7 +56,7 @@
             </el-col>
             <el-col :xs="8" :sm="8" :md="8" :lg="8" :xl="8">
                 <div class="product-stock">
-                    <div v-if="!isSock" class="in-stock">
+                    <div v-if="!product.isSock" class="in-stock">
                         <img
                             class="image"
                             src="../../../../assets/images/homework3/icon/success_icon.svg"
