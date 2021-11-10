@@ -697,7 +697,7 @@ class Filters extends VuexModule {
                 {
                     id: '8',
                     min: 7000,
-                    max: -1,
+                    max: Infinity,
                     quantity: 1,
                     selected: false,
                 },
@@ -847,9 +847,7 @@ class Filters extends VuexModule {
                 const tempProducts = listProduct.filter(
                     (item) =>
                         this.listFiler.filterName.listPrices?.find(
-                            (lP) =>
-                                lP.min <= item.salePrice &&
-                                (lP.max >= item.salePrice || lP.max === -1),
+                            (lP) => lP.min <= item.salePrice && lP.max >= item.salePrice,
                         ) !== undefined,
                 );
                 listProduct = tempProducts;
