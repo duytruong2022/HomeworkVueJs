@@ -158,5 +158,6 @@ export default class ListViewCaculate extends Vue {
     margin-top: 13.5px;
     margin-left: 5px;
     margin-right: 5px;
+    text-align: center;
 }
 </style>
